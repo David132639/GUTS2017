@@ -1,3 +1,5 @@
+##Version 1.1 Sohva
+
 import Tkinter
 import time
 import random
