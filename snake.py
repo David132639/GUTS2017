@@ -1,3 +1,5 @@
+##Version 1.1 Sohva
+
 import Tkinter
 import time
 import random
@@ -28,10 +30,8 @@ def get_score():
 def createSnake():
     global snake
     global sGrid
-    snake = [(4,9),(4,8),(4,7),(4,6)]
-    for item in snake:
-        sGrid[item[0]][item[1]].configure(image = snakeskin)
-        sGrid[snake[-1][0]][snake[-1][1]].configure(image = snakeleft)
+    ##SNAKE MODIFIED 1.1 SOHVA
+    snake = (4,6)
 
 def newGame():
     global snake
@@ -74,31 +74,37 @@ def game():
     global direction
     global game_on
     global highscore
-    loc = (snake[-1][0], snake[-1][1])
+    ## SNAKE CHANGED 1.1 S
+    loc = snake
     #Update the location
     newloc = ((loc[0]+direction[0])%rows,(loc[1]+direction[1])%columns)
 
-    if newloc in snake:
-        #If we hit the snake, the game is over
-        game_on = False
-        for item in snake:
-            sGrid[item[0]][item[1]].configure(bg = "red")
-            if len(snake) - 4 > highscore:
-                scores = open("snake_high_score.txt","w")
-                scores.write(str(len(snake)-4))
-                scores.close()
-    elif newloc == food:
-        #If we hit food, the snake won't get shorter and the location of food is changed
-        snake += [newloc]
-        addFood()
-        levellabel.configure(text = "Level: " + str(len(snake)-4))
-        if len(snake) - 4 > highscore:
-            scorelabel.configure(text = "Record: " + str(len(snake)-4))
-    else:
+## COMMENTED OUT 1.1 SOHVA
+##    if newloc in snake:
+##        #If we hit the snake, the game is over
+##        game_on = False
+##        for item in snake:
+##            sGrid[item[0]][item[1]].configure(bg = "red")
+##            if len(snake) - 4 > highscore:
+##                scores = open("snake_high_score.txt","w")
+##                scores.write(str(len(snake)-4))
+##                scores.close()
+##    elif newloc == food:
+##        #If we hit food, the snake won't get shorter and the location of food is changed
+##        snake += [newloc]
+##        addFood()
+##        levellabel.configure(text = "Level: " + str(len(snake)-4))
+##        if len(snake) - 4 > highscore:
+##            scorelabel.configure(text = "Record: " + str(len(snake)-4))
+##    else:
         #The tail of the snake is removed and the new location added
-        sGrid[snake[0][0]][snake[0][1]].configure(image = grass)
-        snake = snake[1:] + [newloc]
-    sGrid[loc[0]][loc[1]].configure(image = snakeskin)
+        ## SNAKE CHANGED 1.1 SOHVA
+        ## INDENTATION  CHANGED
+    sGrid[snake[0]][snake[1]].configure(image = grass)
+    snake = newloc
+    ##LINE COMMENTED OUT 1.1 SOHVA
+            
+    ##sGrid[loc[0]][loc[1]].configure(image = snakeskin)
     #Make the head to point to the right direction
     nextloc = (newloc[0] + direction[0], newloc[1] + direction[1])
     if direction == (0,-1):
@@ -122,6 +128,7 @@ def game():
         else:
             snakehead = snakedown
     sGrid[newloc[0]][newloc[1]].configure(image = snakehead)
+
 
 #Functions to turn the snake
 #If the snake is already moving to the same or opposite direction, nothing happens
