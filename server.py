@@ -10,9 +10,11 @@ def listen():
         	print(data.decode("UTF-8"))
 	s.close
 
-Thread(target=listen).start()
+list=Thread(target=listen)
+list.daemon=True
+list.start()
 
 m=socket.socket(socket.AF_INET,socket.SOCK_DGRAM)
 while True:
-	m.sendto(bytes("Hello","UTF-8"),("127.0.0.1",5556))
+	m.sendto("Hello",("127.0.0.1",5556))
 	time.sleep(1)
