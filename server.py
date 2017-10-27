@@ -1,15 +1,18 @@
 import socket
+import time
+from threading import Thread
 
-s=socket.socket()
-host=socket.gethostname()
-port=5555
-s.bind((host,port))
+def listen():
+	s=socket.socket(socket.AF_INET,socket.SOCK_DGRAM)
+	s.bind(("127.0.0.1",5555))
+	while True:
+        	data,addr=s.recvfrom(1024)
+        	print(data.decode("UTF-8"))
+	s.close
 
-s.listen(5)
+Thread(target=listen).start()
 
+m=socket.socket(socket.AF_INET,socket.SOCK_DGRAM)
 while True:
-	c,addr=s.accept()
-	print(addr)
-	#m=s.recv(4096)
-	c.sendall(bytes("QWERTY",'UTF-8'))
-	c.close()
+	m.sendto(bytes("Hello","UTF-8"),("127.0.0.1",5556))
+	time.sleep(1)
