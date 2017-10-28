@@ -12,7 +12,7 @@ import wallcreator
 #######################
 m=socket.socket(socket.AF_INET,socket.SOCK_DGRAM)
 with open("ip.txt") as f:
-    opponent=f.readline()
+    opponent=f.readline().strip()
 print opponent
 top=Tkinter.Tk()
 def listen():
