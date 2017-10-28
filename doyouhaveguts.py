@@ -1,5 +1,6 @@
 ##Version 1.6 SOHVA New level
 import Tkinter
+from Tkinter import *
 import time
 import random
 import socket
@@ -126,7 +127,7 @@ def addFood():
     global columns
     global rows
     global foodlist
-    
+    foodlist = []
     while True:
         #Choses a random location
         chosen = (random.randint(2,rows-3),random.randint(2,columns-3))
@@ -353,7 +354,9 @@ def levelUp():
     global monsters
     global level
     global snake
-    sGrid[snake[0]][snake[1]].configure(image = grass)
+    for row in sGrid:
+        for square in row:
+            square.configure(image = grass)
     snake = (1,1)
     level += 1
     levellabel.configure(text = "Level: " + str(level))
