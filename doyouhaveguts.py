@@ -56,6 +56,7 @@ def keypress_foreign(data): # Process incoming messsage
     if data[:8]=='xLevelUp':
         if int(data[8:]) != level:
             goToNextLevel = True
+            print goToNextLevel, "Test1" 
 top.bind("<Key>",keypress_local)
 list=Thread(target=listen)
 list.daemon=True
@@ -211,7 +212,6 @@ def game():
         if otherFinished==True:
             send("xAllFinished")
             nextButton.configure(state="normal")
-            pause()
 
         print "Game nearly Won!"
 
@@ -256,15 +256,14 @@ def game():
         else:
             snakehead = snakedown
     sGrid[newloc[0]][newloc[1]].configure(image = snakehead)
-
-    if updateNextButton:
-        nextButton.configure(state = "normal")
-        pause()
-        updateNextButton = False
-
+    
     if goToNextLevel:
         levelUp()
         goToNextLevel = False
+
+    if updateNextButton:
+        nextButton.configure(state = "normal")
+        updateNextButton = False
 
 
 #Functions to turn the snake
@@ -347,7 +346,6 @@ def levelUp():
         for square in row:
             square.configure(image = grass)
     nextButton.config(state="disabled")
-    pause()
     game_on = True
     snake = (1,1)
     level += 1
@@ -359,7 +357,6 @@ def levelUp():
     addFood()
     
     nextButton.configure(state="disabled")
-    pause()
 
 #Gives the locations in which the monsters can be
 def giveMonLocs(monsters):
