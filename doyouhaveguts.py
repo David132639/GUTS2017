@@ -32,6 +32,7 @@ def keypress_foreign(data): # Process incoming messsage
     print data
     global updateNextButton
     global level
+    global goToNextLevel
     if data=='Up' or data=='w':
         turnUp()
         stop()
