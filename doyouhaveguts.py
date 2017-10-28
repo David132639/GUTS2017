@@ -88,12 +88,6 @@ trophy = ImageTk.PhotoImage(file = "trophy.png")
 ##Adding wall 1.5 SOHVA
 grave = ImageTk.PhotoImage(file = "grave.png")
 
-def get_score():
-    global highscore
-    scores = open("snake_high_score.txt","r")
-    highscore = int(scores.readline())
-    scores.close()
-
 #Creates the initial snake    
 def createSnake():
     global snake
@@ -136,12 +130,12 @@ def addFood():
     global columns
     global rows
     global foodlist
-    foodlist = []
     while True:
         #Choses a random location
         chosen = (random.randint(2,rows-3),random.randint(2,columns-3))
         #Checks that it's not in the snake
-        if chosen != snake and chosen not in walls:
+        monLocs = giveMonLocs(monsters)
+        if chosen != snake and chosen not in walls and chosen != finish and chosen not in monLocs:
             food = chosen
             foodlist.append(food)
             sGrid[food[0]][food[1]].configure(image = foodimage)
@@ -211,51 +205,14 @@ def game():
 ##        ###FOR TESTING
 ##        otherFinished = True
 ##        ###
+        
         if otherFinished==True:
             send("xAllFinished")
             nextButton.configure(state="normal")
             pause()
 
         print "Game nearly Won!"
-##1.7 Commented out
-##        root = Tk()
-##        label = Label(root, text="Game nearly Won!")
-##        label.pack()
-##        root.mainloop()
 
-        #print "Game nearly Won!"
-
-## COMMENTED OUT 1.1 SOHVA
-##    if newloc in snake:
-##        #If we hit the snake, the game is over
-##        game_on = False
-##        for item in snake:
-##            sGrid[item[0]][item[1]].configure(bg = "red")
-##            if len(snake) - 4 > highscore:
-##                scores = open("snake_high_score.txt","w")
-##                scores.write(str(len(snake)-4))
-##                scores.close()
-##    elif newloc == food:
-##        #If we hit food, the snake won't get shorter and the location of food is changed
-##        snake += [newloc]
-##        addFood()
-##        levellabel.configure(text = "Level: " + str(len(snake)-4))
-##        if len(snake) - 4 > highscore:
-##            scorelabel.configure(text = "Record: " + str(len(snake)-4))
-##    else:
-        #The tail of the snake is removed and the new location added
-        ## SNAKE CHANGED 1.1 SOHVA
-        ## INDENTATION  CHANGED
-
-##    if newloc in snake:
-##        #If we hit the snake, the game is over
-##        game_on = False
-##        for item in snake:
-##            sGrid[item[0]][item[1]].configure(bg = "red")
-##            if len(snake) - 4 > highscore:
-##                scores = open("snake_high_score.txt","w")
-##                scores.write(str(len(snake)-4))
-##                scores.close()
     for i in range (len(foodlist)):
         if newloc == foodlist[i]:
 ##        #If we hit food, the snake won't get shorter and the location of food is changed
@@ -273,9 +230,7 @@ def game():
     
     sGrid[snake[0]][snake[1]].configure(image = grass)
     snake = newloc
-    ##LINE COMMENTED OUT 1.1 SOHVA
-            
-    ##sGrid[loc[0]][loc[1]].configure(image = snakeskin)
+
     #Make the head to point to the right direction
     nextloc = (newloc[0] + direction[0], newloc[1] + direction[1])
     if direction == (0,-1):
@@ -384,7 +339,13 @@ def levelUp():
     addFood()
     nextButton.configure(state="disabled")
     pause()
-    
+
+#Gives the locations in which the monsters can be
+def giveMonLocs(monsters):
+    locs = []
+    for monster in monsters:
+        locs += monster.getRoute()
+    return locs
         
 columns = 15
 rows = 10
@@ -401,7 +362,7 @@ sGrid = []
 for rownum in range(rows):
     row = []
     for colnum in range(columns):
-        label = Tkinter.Label(top, image = grass, bg = "#6d6764")
+        label = Tkinter.Label(top, image = grass, bg = "#6d6764", bd=0)
         #label = Tkinter.Label(top, bitmap="gray12", bg = "#e8e8e8")
         row += [label]
         label.grid(row = rownum+1, column = colnum)
@@ -420,7 +381,6 @@ levellabel.grid(row = 0,columnspan=5,column  = 0)
 createWalls(1)
 
 #Place the food
-food = (0,0)
 addFood()
 
 
@@ -469,7 +429,7 @@ while True:
     if game_on:
         game()
     for i in range(10):
-        time.sleep(0.3/10)
+        time.sleep((0.35-level*0.5)/10)
         top.update_idletasks()
         top.update()
     direction = new_direction
