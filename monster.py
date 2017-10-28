@@ -20,3 +20,6 @@ class Monster:
     def move(self):
         self.index = ((self.index + 1)%len(self.route))
         self.loc = self.route[self.index]
+
+    def getRoute(self):
+        return self.route

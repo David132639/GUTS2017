@@ -126,12 +126,12 @@ def addFood():
     global columns
     global rows
     global foodlist
-    foodlist = []
     while True:
         #Choses a random location
         chosen = (random.randint(2,rows-3),random.randint(2,columns-3))
         #Checks that it's not in the snake
-        if chosen != snake and chosen not in walls:
+        monLocs = giveMonLocs(monsters)
+        if chosen != snake and chosen not in walls and chosen != finish and chosen not in monLocs:
             food = chosen
             foodlist.append(food)
             sGrid[food[0]][food[1]].configure(image = foodimage)
@@ -372,7 +372,13 @@ def levelUp():
     addFood()
     nextButton.configure(state="disabled")
     pause()
-    
+
+#Gives the locations in which the monsters can be
+def giveMonLocs(monsters):
+    locs = []
+    for monster in monsters:
+        locs += monster.getRoute()
+    return locs
         
 columns = 15
 rows = 10
@@ -408,7 +414,6 @@ levellabel.grid(row = 0,columnspan=5,column  = 0)
 createWalls(1)
 
 #Place the food
-food = (0,0)
 addFood()
 
 
