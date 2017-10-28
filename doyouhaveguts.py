@@ -428,7 +428,7 @@ while True:
     if game_on:
         game()
     for i in range(10):
-        time.sleep((0.35-level*0.5)/10)
+        time.sleep((0.35-level*0.05)/10)
         top.update_idletasks()
         top.update()
     direction = new_direction
