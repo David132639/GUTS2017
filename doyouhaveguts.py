@@ -90,7 +90,6 @@ grave = ImageTk.PhotoImage(file = "graveBG.png")
 #Creates the initial snake    
 def createSnake():
     global snake
-    global sGrid
     ##SNAKE MODIFIED 1.1 SOHVA
     snake = (1,1)
 
@@ -149,7 +148,6 @@ def game():
     
     global otherFinished
     global goToNextLevel
-    #Makes the snake move
     global snake
     global direction
     global game_on
@@ -160,10 +158,7 @@ def game():
 
     global level
     createWalls(level)
-    
-    #foodlist=[]
-    ## SNAKE CHANGED 1.1 S
-    ## SNAKE MOVING CHANGED 1.2 SOHVA
+
     global moves
     global movesOnce
 
@@ -217,18 +212,10 @@ def game():
 
     for i in range (len(foodlist)):
         if newloc == foodlist[i]:
-##        #If we hit food, the snake won't get shorter and the location of food is changed
             nextloc = newloc[0]-direction[0],newloc[1]-direction[1]
             while nextloc not in walls:
                 newloc = nextloc
                 nextloc = newloc[0]-direction[0],newloc[1]-direction[1]
-             
-        sGrid[snake[0]][snake[1]].configure(image = grass)
-             #addFood() could be kept for fun to make the game more complicated
-##        levellabel.configure(text = "Level: " + str(len(snake)-4))
-##        if len(snake) - 4 > highscore:
-##            scorelabel.configure(text = "Record: " + str(len(snake)-4))
-
     
     sGrid[snake[0]][snake[1]].configure(image = grass)
     snake = newloc
@@ -266,8 +253,6 @@ def game():
         updateNextButton = False
 
 
-#Functions to turn the snake
-#If the snake is already moving to the same or opposite direction, nothing happens
 ##Version 1.2 SOHVA ADDED MOVES VARIABLE FOR DECIDING WHETHER PLAYER MOVES OR NOT
 ##Version 1.22 SOHVA FIXED A BUG WITH THE SNAKE MOVEMENT
 def turnRight():
@@ -275,8 +260,7 @@ def turnRight():
     global new_direction
     global moves
     global movesOnce
-##    if direction[0] != 0:
-##        new_direction = (0,1)
+
     new_direction = (0,1)
     moves = True
     movesOnce = True
@@ -287,8 +271,6 @@ def turnLeft():
     global new_direction
     global moves
     global movesOnce
-##    if direction[0] != 0:
-##        new_direction = (0,-1)
     new_direction = (0,-1)
     moves = True
     movesOnce = True
@@ -298,8 +280,6 @@ def turnUp():
     global new_direction
     global moves
     global movesOnce
-##    if direction[1] != 0:
-##        new_direction = (-1,0)
     new_direction = (-1,0)
     moves = True
     movesOnce = True
@@ -309,8 +289,6 @@ def turnDown():
     global new_direction
     global moves
     global movesOnce
-##    if direction[1] != 0:
-##        new_direction = (1,0)
     new_direction = (1,0)
     moves = True
     movesOnce = True
@@ -318,8 +296,6 @@ def turnDown():
 def pause():
     global game_on
     game_on = not game_on
-
-    
 
 ##VERSION 1.2 SOHVA STOPS PLAYER MOVEMENT
 def stop():
@@ -337,7 +313,6 @@ def levelUp():
     global otherFinished
     global nextButton
     otherFinished=False
-    
     global walls
     global monsters
     global level
@@ -381,7 +356,6 @@ for rownum in range(rows):
     row = []
     for colnum in range(columns):
         label = Tkinter.Label(top, image = grass, bg = "#6d6764", bd=0)
-        #label = Tkinter.Label(top, bitmap="gray12", bg = "#e8e8e8")
         row += [label]
         label.grid(row = rownum+1, column = colnum)
     sGrid += [row]
@@ -400,7 +374,6 @@ createWalls(1)
 
 #Place the food
 addFood()
-
 
 #Tells how to change coordinates
 #up = (1,0); down = (-1,0); left = (0,-1); right = (0,1)
