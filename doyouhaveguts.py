@@ -23,7 +23,7 @@ with open("ip.txt") as f:
     opponent=f.readline().strip()
 print opponent
 def send(msg): # Send message to other computer
-    m.sendto(msg,(str(opponent),5501))
+    m.sendto(msg,(str(opponent),5505))
 def listen():
     r=socket.socket(socket.AF_INET,socket.SOCK_DGRAM)
     r.bind(("0.0.0.0",5505))
@@ -32,7 +32,7 @@ def listen():
             keypress_foreign(data)
     r.close
 def keypress_local(event):
-    m.sendto(event.keysym,(str(opponent),5501))
+    m.sendto(event.keysym,(str(opponent),5505))
 def keypress_foreign(data): # Process incoming messsage
     print data
     global nextButton
