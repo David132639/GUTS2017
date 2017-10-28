@@ -201,12 +201,6 @@ def game():
             levelUp()
 
         print "Game nearly Won!"
-        root = Tk()
-        label = Label(root, text="Game nearly Won!")
-        label.pack()
-        root.mainloop()
-
-        #print "Game nearly Won!"
 
 ## COMMENTED OUT 1.1 SOHVA
 ##    if newloc in snake:
@@ -372,7 +366,7 @@ game_on = True
 snake = []
 highscore = 0
 foodlist=[]
-finish=(rows-2, columns-2)
+finish=(rows-3, columns-3)
 
 
 #Create the grid 
