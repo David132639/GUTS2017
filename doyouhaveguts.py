@@ -72,14 +72,9 @@ import monster
 ##Changed pictures 1.31 SOHVA
 grass = ImageTk.PhotoImage(file = "background.png")
 foodimage = ImageTk.PhotoImage(file = "spiderBG.png")
-snakeleft = ImageTk.PhotoImage(file = "pumpkin2BG.png")
-snakeup = ImageTk.PhotoImage(file = "pumpkin2BG.png")
-snakeright = ImageTk.PhotoImage(file = "pumpkin2BG.png")
-snakedown = ImageTk.PhotoImage(file = "pumpkin2BG.png")
-snakelefteat = ImageTk.PhotoImage(file = "happy_pumpkinBG.png")
-snakeupeat = ImageTk.PhotoImage(file = "happy_pumpkinBG.png")
-snakerighteat = ImageTk.PhotoImage(file = "happy_pumpkinBG.png")
-snakedowneat = ImageTk.PhotoImage(file = "happy_pumpkinBG.png")
+snakeImage = ImageTk.PhotoImage(file = "pumpkin2BG.png")
+happyImage = ImageTk.PhotoImage(file = "happy_pumpkinBG.png")
+scaredImage = ImageTk.PhotoImage(file = "pumpkin_scaredBG.png")
 monsterImages = [ImageTk.PhotoImage(file = "ghostBG.png"),\
                  ImageTk.PhotoImage(file = "batBG.png"),\
                  ImageTk.PhotoImage(file = "82872-200BG.png"),\
@@ -248,26 +243,20 @@ def game():
 
     #Make the head to point to the right direction
     nextloc = (newloc[0] + direction[0], newloc[1] + direction[1])
-    if direction == (0,-1):
-        if nextloc == food:
-            snakehead = snakelefteat
-        else:
-            snakehead = snakeleft
-    elif direction == (0,1):
-        if nextloc == food:
-            snakehead = snakerighteat
-        else:
-            snakehead = snakeright
-    elif direction == (-1,0):
-        if nextloc == food:
-            snakehead = snakeupeat
-        else:
-            snakehead = snakeup
+    nextLocs = giveNextLocs(snake)
+    snakehead = snakeImage
+    if finish in nextLocs or newloc == finish:
+        snakehead = happyImage
     else:
-        if nextloc == food:
-            snakehead = snakedowneat
-        else:
-            snakehead = snakedown
+        for loc in nextLocs:
+            if loc in foodlist:
+                snakehead = scaredImage
+                break
+        for monster in monsters:
+            if monster.getLoc() in nextLocs:
+                snakehead = scaredImage
+                break
+    
     sGrid[newloc[0]][newloc[1]].configure(image = snakehead)
     
     if goToNextLevel:
