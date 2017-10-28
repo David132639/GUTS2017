@@ -31,7 +31,6 @@ def keypress_local(event):
 def keypress_foreign(data): # Process incoming messsage
     print data
     global updateNextButton
-    global level
     if data=='Up' or data=='w':
         turnUp()
         stop()
@@ -52,9 +51,6 @@ def keypress_foreign(data): # Process incoming messsage
         otherFinished=True
     if data=='xAllFinished':
         updateNextButton = True
-    if data[:8]=='xLevelUp':
-        if int(data[8:]) != level:
-            levelUp()
 top.bind("<Key>",keypress_local)
 list=Thread(target=listen)
 list.daemon=True
@@ -103,6 +99,7 @@ def newGame():
     global new_direction
     global foodlist
     global level
+    level = 1
     sGrid[snake[0]][snake[1]].configure(image = snakeright)
     createSnake()
     foodlist=[]
@@ -321,6 +318,7 @@ def stop():
 
 def createWalls(level):
     global walls
+    walls=[]
     walls = wallcreator.createWalls(level)
     for wall in walls:
         sGrid[wall[0]][wall[1]].configure(image = grave)
@@ -332,18 +330,18 @@ def levelUp():
     global monsters
     global level
     global snake
-    level += 1
-    send("xLevelUp" + str(level))
     for row in sGrid:
         for square in row:
             square.configure(image = grass)
     snake = (1,1)
+    level += 1
     levellabel.configure(text = "Level: " + str(level))
     monsters = monstercreator.createMonsters(level)
     createWalls(level)
     foodlist = []
     addFood()
-    nextButton.configure(state="disabled")
+    
+    nextButton.config(state="disabled")
     pause()
 
 #Gives the locations in which the monsters can be
@@ -402,13 +400,14 @@ movesOnce = False
 otherFinished=False
 
 updateNextButton = False
-
+global nextButton
 quitButton = Tkinter.Button(top,text="Quit",command=top.destroy)
 quitButton.grid(row = 0, column = columns + 1,rowspan=2)
 newButton = Tkinter.Button(top,text="New Game", command = newGame)
 newButton.grid(row=1,column=columns+1,rowspan=2)
 nextButton = Tkinter.Button(top,text="Next Level", command = levelUp, state="disabled")
 nextButton.grid(row=2,column=columns+1,rowspan=2)
+
 
 #Bind the keys
 #top.bind( "<KeyPress-Down>", turnDown)
