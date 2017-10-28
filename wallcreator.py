@@ -23,14 +23,16 @@ def createWalls(case):
     elif case == 2:
         for i in range(1,10):
             walls += [(3,i)]
-        for i in range(3,14):
+        for i in range(3,11):
             if i != 8:
-                walls += [(5,i)]
+                walls += [(6,i)]
+        for i in range(11,14):
+            walls += [(5,i)]
     elif case == 3:
         for i in range(1,6):
             walls += [(i,4)]
         for i in range(2,9):
-            walls += [(i,6)]
+            walls += [(i,7)]
         for i in range(4,9):
             for j in range(9,11):
                 walls += [(i,j)]
