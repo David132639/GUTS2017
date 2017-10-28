@@ -1,4 +1,4 @@
-##Version 1.2 SOHVA
+##Version 1.21 SOHVA
 import Tkinter
 import time
 import random
@@ -85,11 +85,21 @@ def game():
     global highscore
     global numFood
     global foodlist
+    
     #foodlist=[]
     ## SNAKE CHANGED 1.1 S
+    ## SNAKE MOVING CHANGED 1.2 SOHVA
+    global moves
+    global movesOnce
+
+    
     loc = snake
     #Update the location
-    newloc = ((loc[0]+direction[0])%rows,(loc[1]+direction[1])%columns)
+    if moves or movesOnce:
+        newloc = ((loc[0]+direction[0])%rows,(loc[1]+direction[1])%columns)
+        movesOnce = False
+    else:
+        newloc = loc
 
 ## COMMENTED OUT 1.1 SOHVA
 ##    if newloc in snake:
@@ -173,36 +183,57 @@ def game():
 
 #Functions to turn the snake
 #If the snake is already moving to the same or opposite direction, nothing happens
+##Version 1.2 SOHVA ADDED MOVES VARIABLE FOR DECIDING WHETHER PLAYER MOVES OR NOT
 def turnRight(event):
     global direction
     global new_direction
+    global moves
+    global movesOnce
     if direction[0] != 0:
         new_direction = (0,1)
+    moves = True
+    movesOnce = True
     
 
 def turnLeft(event):
     global direction
     global new_direction
+    global moves
+    global movesOnce
     if direction[0] != 0:
         new_direction = (0,-1)
+    moves = True
+    movesOnce = True
 
 def turnUp(event):
     global direction
     global new_direction
+    global moves
+    global movesOnce
     if direction[1] != 0:
         new_direction = (-1,0)
+    moves = True
+    movesOnce = True
 
 def turnDown(event):
     global direction
     global new_direction
+    global moves
+    global movesOnce
     if direction[1] != 0:
         new_direction = (1,0)
+    moves = True
+    movesOnce = True
 
-def pause(even):
+def pause(event):
     global game_on
     game_on = not game_on
 
-## 1.11 CHANGED THE SIZE        
+##VERSION 1.2 SOHVA STOPS PLAYER MOVEMENT
+def stop(event):
+    global moves
+    moves = False
+        
 columns = 15
 rows = 10
 game_on = True
@@ -241,6 +272,10 @@ addFood()
 direction = (0,-1) #Left
 new_direction = (0,-1)
 
+## VERSION 1.2 SOHVA a boolean for the player movement
+moves = False
+movesOnce = False
+
 quitButton = Tkinter.Button(top,text="Quit",command=top.destroy)
 quitButton.grid(row = 0, column = columns + 1,rowspan=2)
 newButton = Tkinter.Button(top,text="New Game", command = newGame)
@@ -256,6 +291,16 @@ top.bind( "<KeyPress-a>", turnLeft)
 top.bind( "<KeyPress-Right>", turnRight)
 top.bind( "<KeyPress-d>", turnRight)
 top.bind( "<space>", pause)
+
+##Key releases VERSION 1.2 SOHVA
+top.bind( "<KeyRelease-Down>", stop)
+top.bind( "<KeyRelease-s>", stop)
+top.bind( "<KeyRelease-Up>", stop)
+top.bind( "<KeyRelease-w>", stop)
+top.bind( "<KeyRelease-Left>", stop)
+top.bind( "<KeyRelease-a>", stop)
+top.bind( "<KeyRelease-Right>", stop)
+top.bind( "<KeyRelease-d>", stop)
 
 while True:
     if game_on:
