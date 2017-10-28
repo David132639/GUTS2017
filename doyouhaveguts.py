@@ -340,6 +340,7 @@ def createWalls(level):
     for wall in walls:
         sGrid[wall[0]][wall[1]].configure(image = grave)
 
+<<<<<<< HEAD
 def levelUp():
     global walls
     global monsters
@@ -355,8 +356,11 @@ def levelUp():
     addFood()
     
     
+=======
 def nextLevel():
     otherFinished=False
+
+>>>>>>> 90721b5a7df42b6b1736491244d015a5f519299f
         
 columns = 15
 rows = 10
