@@ -1,4 +1,4 @@
-##Version 1.6 SOHVA New level
+##Version 1.7 Marija count
 import Tkinter
 from Tkinter import *
 import time
@@ -103,6 +103,7 @@ def newGame():
     global direction
     global new_direction
     global foodlist
+    global level
     foodlist=[]
     get_score()
     for row in sGrid:
@@ -118,7 +119,7 @@ def newGame():
     game_on = True
     direction = (0,-1)
     new_direction = (0,-1)
-    levellabel.configure(text = "Level: " + str(len(snake)-0))
+    levellabel.configure(text = "Level: " + level)
     
 def addFood():
     global snake
@@ -201,6 +202,12 @@ def game():
             levelUp()
 
         print "Game nearly Won!"
+        root = Tk()
+        label = Label(root, text="Game nearly Won!")
+        label.pack()
+        root.mainloop()
+
+        #print "Game nearly Won!"
 
 ## COMMENTED OUT 1.1 SOHVA
 ##    if newloc in snake:
@@ -366,7 +373,7 @@ game_on = True
 snake = []
 highscore = 0
 foodlist=[]
-finish=(rows-3, columns-3)
+finish=(rows-2, columns-2)
 
 
 #Create the grid 
