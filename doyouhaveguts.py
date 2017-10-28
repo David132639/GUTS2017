@@ -99,6 +99,8 @@ def createSnake():
     snake = (1,1)
 
 def newGame():
+    global monsterImage
+    global monsterImages
     global snake
     global sGrid
     global food
@@ -109,11 +111,12 @@ def newGame():
     global new_direction
     global foodlist
     global level
-    global monsterImage
-    global monsterImages
+    global lives
 
+    lives = 5
+    liveslabel.configure(text = "You have "+str(lives)+" attempts")
     monsterImage = monsterImages[random.randint(0,len(monsterImages)-1)]
-    
+
     level = 1
     sGrid[snake[0]][snake[1]].configure(image = snakeright)
     createSnake()
@@ -133,6 +136,7 @@ def newGame():
     direction = (0,-1)
     new_direction = (0,-1)
     levellabel.configure(text = "Level: " + str(level))
+    
     
 def addFood():
     global snake
@@ -167,10 +171,13 @@ def game():
 
     global level
     createWalls(level)
-
+    global lives
     global moves
     global movesOnce
 
+    statelabel.configure(text = "Have not won/lost yet.")
+    
+    
     ##Adding monsters 1.3 SOHVA
     global monsters
 
@@ -202,6 +209,10 @@ def game():
     ##Check for the collision with monster 1.3 SOHVA
     for monster in monsters:
         if newloc == monster.getLoc():
+            lives -= 1
+            liveslabel.configure(text = "You have "+str(lives)+" attempts")
+            if lives == 0:
+                dead()
             send("xDead")
             print "Hit a monster"
             newloc = (1,1)
@@ -216,11 +227,16 @@ def game():
         if otherFinished==True:
             send("xAllFinished")
             nextButton.configure(state="normal")
+            win()
 
         print "Game nearly Won!"
 
     for i in range (len(foodlist)):
         if newloc == foodlist[i]:
+            lives -= 1
+            liveslabel.configure(text = "You have "+str(lives)+" attempts")
+            if lives == 0:
+                dead()
             nextloc = newloc[0]-direction[0],newloc[1]-direction[1]
             while nextloc not in walls:
                 newloc = nextloc
@@ -362,7 +378,11 @@ highscore = 0
 foodlist=[]
 finish=(rows-3, columns-3)
 walls = []
-
+lives = 5
+liveslabel = Tkinter.Label(top, text = "You have "+str(lives)+" attempts")
+liveslabel.grid(row = 0, columnspan = 5, column = 4)
+statelabel = Tkinter.Label(top, text = "Have not won/lost yet.")
+statelabel.grid(row = 0, columnspan = 6, column = 9)
 
 #Create the grid 
 sGrid = []
@@ -377,6 +397,11 @@ for rownum in range(rows):
 
 monsters = monstercreator.createMonsters(1)
 createSnake()
+
+
+
+
+
 
 ##1.6 SOHVA adds the variable for level
 level = 1
@@ -434,9 +459,26 @@ nextButton.grid(row=2,column=columns+1,rowspan=2)
 
 #Keeps track on the level
 
+def dead():
+    global game_on
+    global statelabel
+    if game_on:
+        game_on = False
+        statelabel.configure(text = "You lost. Try again!")
+        
+
+def win():
+    #global game_on
+    global statelabel
+    
+    statelabel.configure(text = "You won. Try next level!")
+        
+
 while True:
     if game_on:
+        
         game()
+        
     for i in range(10):
         time.sleep((0.35-level*0.05)/10)
         top.update_idletasks()
