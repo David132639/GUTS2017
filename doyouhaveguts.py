@@ -51,6 +51,7 @@ def keypress_foreign(data): # Process incoming messsage
         otherFinished=True
     if data=='xAllFinished':
         nextButton.configure(state="normal")
+        send("xAllFinished")
         pause()
 top.bind("<Key>",keypress_local)
 list=Thread(target=listen)
