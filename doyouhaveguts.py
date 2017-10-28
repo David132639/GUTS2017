@@ -395,7 +395,7 @@ sGrid = []
 for rownum in range(rows):
     row = []
     for colnum in range(columns):
-        label = Tkinter.Label(top, image = grass, bg = "#6d6764")
+        label = Tkinter.Label(top, image = grass, bg = "#6d6764", bd=0)
         #label = Tkinter.Label(top, bitmap="gray12", bg = "#e8e8e8")
         row += [label]
         label.grid(row = rownum+1, column = colnum)
