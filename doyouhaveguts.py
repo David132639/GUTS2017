@@ -402,13 +402,10 @@ for rownum in range(rows):
 
 monsters = monstercreator.createMonsters(1)
 createSnake()
-get_score()
 
 ##1.6 SOHVA adds the variable for level
 level = 1
 
-scorelabel = Tkinter.Label(top, text = "Record: " + str(highscore))
-scorelabel.grid(row = 0,columnspan=5,column  = 5)
 levellabel = Tkinter.Label(top, text = "Level: " + str(level))
 levellabel.grid(row = 0,columnspan=5,column  = 0)
 
