@@ -9,12 +9,15 @@ from PIL import ImageTk
 ##Adds walls
 import wallcreator
 
-#######################
+top=Tkinter.Tk()
+
+####################### Network staff
 m=socket.socket(socket.AF_INET,socket.SOCK_DGRAM)
 with open("ip.txt") as f:
     opponent=f.readline().strip()
 print opponent
-top=Tkinter.Tk()
+def send(msg): # Send message to other computer
+    m.sendto(msg,(str(opponent),5501))
 def listen():
     r=socket.socket(socket.AF_INET,socket.SOCK_DGRAM)
     r.bind(("0.0.0.0",5501))
@@ -24,7 +27,7 @@ def listen():
     r.close
 def keypress_local(event):
     m.sendto(event.keysym,(str(opponent),5501))
-def keypress_foreign(data):
+def keypress_foreign(data): # Process incoming messsage
     print data
     if data=='Up' or data=='w':
         turnUp()
@@ -38,9 +41,13 @@ def keypress_foreign(data):
     if data=='Right' or data=='d':
         turnRight()
         stop()
-    if data=='xPA':
-        pass
-#       example of non-key communication
+    if data=='xDead':
+        print "Partner hit a monster"
+        newloc = (1,1)
+    if data=='xOneFinished':
+        otherFinished=True
+    if data=='xAllFinished':
+        nextLevel()
 top.bind("<Key>",keypress_local)
 list=Thread(target=listen)
 list.daemon=True
@@ -86,6 +93,8 @@ def createSnake():
     snake = (1,1)
 
 def newGame():
+    global otherFinished
+    otherFinished=False
     global snake
     global sGrid
     global food
@@ -180,11 +189,16 @@ def game():
     ##Check for the collision with monster 1.3 SOHVA
     for monster in monsters:
         if newloc == monster.getLoc():
+            send("xDead")
             print "Hit a monster"
             newloc = (1,1)
 
     if newloc == finish:
-        print "Game Won!"
+        send("xOneFinished")
+        if otherFinished==True:
+            send("xAllFinished")
+            nextLevel()
+        print "Game nearly Won!"
 
 ## COMMENTED OUT 1.1 SOHVA
 ##    if newloc in snake:
@@ -341,6 +355,8 @@ def levelUp():
     addFood()
     
     
+def nextLevel():
+    otherFinished=False
         
 columns = 15
 rows = 10
