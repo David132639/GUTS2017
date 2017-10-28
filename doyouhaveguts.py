@@ -151,6 +151,9 @@ def game():
     global highscore
     global numFood
     global foodlist
+
+    global level
+    createWalls(level)
     
     #foodlist=[]
     ## SNAKE CHANGED 1.1 S
@@ -382,6 +385,7 @@ snake = []
 highscore = 0
 foodlist=[]
 finish=(rows-3, columns-3)
+walls = []
 
 
 #Create the grid 
