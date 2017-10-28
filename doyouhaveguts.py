@@ -201,7 +201,7 @@ def game():
 
         print "Game nearly Won!"
         root = Tk()
-        label = Label(root, text="Game nerly Won!")
+        label = Label(root, text="Game nearly Won!")
         label.pack()
         root.mainloop()
 
