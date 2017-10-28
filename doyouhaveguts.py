@@ -1,7 +1,6 @@
 ##Version 1.7 Marija count
 import Tkinter
 from Tkinter import *
-import vlc
 import time
 import random
 import socket
