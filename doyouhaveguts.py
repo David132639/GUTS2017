@@ -82,10 +82,10 @@ snakedowneat = ImageTk.PhotoImage(file = "happy_pumpkinBG.png")
 monsterImage = ImageTk.PhotoImage(file = "ghostBG.png")
 
 ##Adding finish 1.4 Sohva
-trophy = ImageTk.PhotoImage(file = "trophy.png")
+trophy = ImageTk.PhotoImage(file = "trophyBG.png")
 
 ##Adding wall 1.5 SOHVA
-grave = ImageTk.PhotoImage(file = "grave.png")
+grave = ImageTk.PhotoImage(file = "graveBG.png")
 
 #Creates the initial snake    
 def createSnake():
