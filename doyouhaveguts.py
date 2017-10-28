@@ -99,12 +99,14 @@ def newGame():
     global new_direction
     global foodlist
     global level
+    sGrid[snake[0]][snake[1]].configure(image = snakeright)
+    createSnake()
     foodlist=[]
-    get_score()
+    #get_score()
     for row in sGrid:
         for item in row:
             item.configure(image = grass, bg = "grey")
-    createSnake()
+    
     global numFood
     numFood = random.randint(1,3)
     for i in range (0, numFood):
