@@ -1,4 +1,4 @@
-##Version 1.5 SOHVA
+##Version 1.6 SOHVA New level
 import Tkinter
 import time
 import random
@@ -124,7 +124,7 @@ def addFood():
         #Choses a random location
         chosen = (random.randint(2,rows-3),random.randint(2,columns-3))
         #Checks that it's not in the snake
-        if chosen not in snake:
+        if chosen != snake and chosen not in walls:
             food = chosen
             foodlist.append(food)
             sGrid[food[0]][food[1]].configure(image = foodimage)
@@ -320,10 +320,27 @@ def stop():
     global moves
     moves = False
 
-def createWalls():
+def createWalls(level):
     global walls
+    walls = wallcreator.createWalls(level)
     for wall in walls:
         sGrid[wall[0]][wall[1]].configure(image = grave)
+
+def levelUp():
+    global walls
+    global monsters
+    global level
+    global snake
+    sGrid[snake[0]][snake[1]].configure(image = grass)
+    snake = (1,1)
+    level += 1
+    levellabel.configure(text = "Level: " + str(level))
+    monsters = monstercreator.createMonsters(level)
+    createWalls(level)
+    foodlist = []
+    addFood()
+    
+    
         
 columns = 15
 rows = 10
@@ -347,21 +364,23 @@ for rownum in range(rows):
 
 
 monsters = monstercreator.createMonsters(1)
-walls = wallcreator.createWalls(1)
-print walls
 createSnake()
 get_score()
 
+##1.6 SOHVA adds the variable for level
+level = 1
+
 scorelabel = Tkinter.Label(top, text = "Record: " + str(highscore))
 scorelabel.grid(row = 0,columnspan=5,column  = 5)
-levellabel = Tkinter.Label(top, text = "Level: " + str(len(snake)-1))
+levellabel = Tkinter.Label(top, text = "Level: " + str(level))
 levellabel.grid(row = 0,columnspan=5,column  = 0)
+
+createWalls(1)
 
 #Place the food
 food = (0,0)
 addFood()
 
-createWalls()
 
 #Tells how to change coordinates
 #up = (1,0); down = (-1,0); left = (0,-1); right = (0,1)
@@ -376,6 +395,8 @@ quitButton = Tkinter.Button(top,text="Quit",command=top.destroy)
 quitButton.grid(row = 0, column = columns + 1,rowspan=2)
 newButton = Tkinter.Button(top,text="New Game", command = newGame)
 newButton.grid(row=1,column=columns+1,rowspan=2)
+newButton = Tkinter.Button(top,text="Next Level", command = levelUp)
+newButton.grid(row=2,column=columns+1,rowspan=2)
 
 #Bind the keys
 #top.bind( "<KeyPress-Down>", turnDown)
@@ -397,6 +418,8 @@ newButton.grid(row=1,column=columns+1,rowspan=2)
 #top.bind( "<KeyRelease-a>", stop)
 #top.bind( "<KeyRelease-Right>", stop)
 #top.bind( "<KeyRelease-d>", stop)
+
+#Keeps track on the level
 
 while True:
     if game_on:
