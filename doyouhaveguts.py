@@ -120,7 +120,7 @@ def newGame():
     game_on = True
     direction = (0,-1)
     new_direction = (0,-1)
-    levellabel.configure(text = "Level: " + level)
+    levellabel.configure(text = "Level: " + str(level))
     
 def addFood():
     global snake
