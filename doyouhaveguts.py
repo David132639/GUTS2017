@@ -1,4 +1,5 @@
-##Version 1.7 Marija count
+##Version 2.0 MonsterImage is now random SOHVA
+
 import Tkinter
 from Tkinter import *
 import time
@@ -79,7 +80,11 @@ snakelefteat = ImageTk.PhotoImage(file = "happy_pumpkinBG.png")
 snakeupeat = ImageTk.PhotoImage(file = "happy_pumpkinBG.png")
 snakerighteat = ImageTk.PhotoImage(file = "happy_pumpkinBG.png")
 snakedowneat = ImageTk.PhotoImage(file = "happy_pumpkinBG.png")
-monsterImage = ImageTk.PhotoImage(file = "ghostBG.png")
+monsterImages = [ImageTk.PhotoImage(file = "ghostBG.png"),\
+                 ImageTk.PhotoImage(file = "batBG.png"),\
+                 ImageTk.PhotoImage(file = "82872-200BG.png"),\
+                 ImageTk.PhotoImage(file = "mouseBG.png")]
+monsterImage = monsterImages[random.randint(0,len(monsterImages)-1)]
 
 ##Adding finish 1.4 Sohva
 trophy = ImageTk.PhotoImage(file = "trophyBG.png")
@@ -104,6 +109,10 @@ def newGame():
     global new_direction
     global foodlist
     global level
+    global monsterImage
+    global monsterImages
+
+    monsterImage = monsterImages[random.randint(0,len(monsterImages)-1)]
     
     level = 1
     sGrid[snake[0]][snake[1]].configure(image = snakeright)
@@ -317,6 +326,11 @@ def levelUp():
     global monsters
     global level
     global snake
+    global monsterImage
+    global monsterImages
+
+    monsterImage = monsterImages[random.randint(0,len(monsterImages)-1)]
+    
     for row in sGrid:
         for square in row:
             square.configure(image = grass)
