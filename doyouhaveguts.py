@@ -220,14 +220,10 @@ def game():
     for i in range (len(foodlist)):
         if newloc == foodlist[i]:
 ##        #If we hit food, the snake won't get shorter and the location of food is changed
-                if direction == (0,-1):
-                    newloc = (snake[0],columns-1)
-                elif direction == (0,1):
-                    newloc = (snake[0],0)
-                elif direction == (-1, 0):
-                    newloc = (rows-1,snake[1])
-                else:
-                    newloc = (0,snake[1])
+            nextloc = newloc[0]-direction[0],newloc[1]-direction[1]
+            while nextloc not in walls:
+                newloc = nextloc
+                nextloc = newloc[0]-direction[0],newloc[1]-direction[1]
              
         sGrid[snake[0]][snake[1]].configure(image = grass)
              #addFood() could be kept for fun to make the game more complicated
