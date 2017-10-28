@@ -1,11 +1,16 @@
 ##Version 1.7 Marija count
 import Tkinter
 from Tkinter import *
+import vlc
 import time
 import random
 import socket
 from threading import Thread
 from PIL import ImageTk
+
+##Music
+p = vlc.MediaPlayer("music.mp3")
+p.play()
 
 ##Adds walls
 import wallcreator
@@ -21,7 +26,7 @@ def send(msg): # Send message to other computer
     m.sendto(msg,(str(opponent),5501))
 def listen():
     r=socket.socket(socket.AF_INET,socket.SOCK_DGRAM)
-    r.bind(("0.0.0.0",5501))
+    r.bind(("0.0.0.0",5505))
     while True:
             data,addr=r.recvfrom(1024)
             keypress_foreign(data)
@@ -51,7 +56,6 @@ def keypress_foreign(data): # Process incoming messsage
         otherFinished=True
     if data=='xAllFinished':
         nextButton.configure(state="normal")
-        send("xAllFinished")
         pause()
 top.bind("<Key>",keypress_local)
 list=Thread(target=listen)
@@ -209,6 +213,8 @@ def game():
 ##        ###
         if otherFinished==True:
             send("xAllFinished")
+            nextButton.configure(state="normal")
+            pause()
 
         print "Game nearly Won!"
 ##1.7 Commented out
