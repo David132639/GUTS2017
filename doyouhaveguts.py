@@ -1,10 +1,13 @@
-##Version 1.4 SOHVA
+##Version 1.5 SOHVA
 import Tkinter
 import time
 import random
 import socket
 from threading import Thread
 from PIL import ImageTk
+
+##Adds walls
+import wallcreator
 
 #######################
 m=socket.socket(socket.AF_INET,socket.SOCK_DGRAM)
@@ -66,6 +69,9 @@ monsterImage = ImageTk.PhotoImage(file = "ghost.png")
 ##Adding finish 1.4 Sohva
 trophy = ImageTk.PhotoImage(file = "trophy.png")
 
+##Adding wall 1.5 SOHVA
+grave = ImageTk.PhotoImage(file = "grave.png")
+
 def get_score():
     global highscore
     scores = open("snake_high_score.txt","r")
@@ -77,7 +83,7 @@ def createSnake():
     global snake
     global sGrid
     ##SNAKE MODIFIED 1.1 SOHVA
-    snake = (0,0)
+    snake = (1,1)
 
 def newGame():
     global snake
@@ -145,6 +151,9 @@ def game():
 
     ##Adding finish 1.4 Sohva
     global finish
+
+    ##Adding wall 1.5 Sohva
+    global walls
     sGrid[finish[0]][finish[1]].configure(image = trophy)
 
     for monster in monsters:
@@ -153,7 +162,7 @@ def game():
         monster.move()
         monloc = monster.getLoc()
         sGrid[monloc[0]][monloc[1]].configure(image = monsterImage)
-         
+
         
 
     
@@ -162,6 +171,9 @@ def game():
     if moves or movesOnce:
         newloc = ((loc[0]+direction[0])%rows,(loc[1]+direction[1])%columns)
         movesOnce = False
+        for wall in walls:
+            if newloc == wall:
+                newloc = loc
     else:
         newloc = loc
 
@@ -311,6 +323,11 @@ def pause():
 def stop():
     global moves
     moves = False
+
+def createWalls():
+    global walls
+    for wall in walls:
+        sGrid[wall[0]][wall[1]].configure(image = grave)
         
 columns = 15
 rows = 10
@@ -334,6 +351,8 @@ for rownum in range(rows):
 
 
 monsters = monstercreator.createMonsters(1)
+walls = wallcreator.createWalls(1)
+print walls
 createSnake()
 get_score()
 
@@ -345,6 +364,8 @@ levellabel.grid(row = 0,columnspan=5,column  = 0)
 #Place the food
 food = (0,0)
 addFood()
+
+createWalls()
 
 #Tells how to change coordinates
 #up = (1,0); down = (-1,0); left = (0,-1); right = (0,1)
