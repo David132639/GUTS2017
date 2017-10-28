@@ -31,6 +31,7 @@ def keypress_local(event):
 def keypress_foreign(data): # Process incoming messsage
     print data
     global updateNextButton
+    global level
     if data=='Up' or data=='w':
         turnUp()
         stop()
@@ -51,6 +52,9 @@ def keypress_foreign(data): # Process incoming messsage
         otherFinished=True
     if data=='xAllFinished':
         updateNextButton = True
+    if data[:8]=='xLevelUp':
+        if int(data[8:]) != level:
+            levelUp()
 top.bind("<Key>",keypress_local)
 list=Thread(target=listen)
 list.daemon=True
@@ -328,11 +332,12 @@ def levelUp():
     global monsters
     global level
     global snake
+    level += 1
+    send("xLevelUp" + str(level))
     for row in sGrid:
         for square in row:
             square.configure(image = grass)
     snake = (1,1)
-    level += 1
     levellabel.configure(text = "Level: " + str(level))
     monsters = monstercreator.createMonsters(level)
     createWalls(level)
