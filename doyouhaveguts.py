@@ -48,7 +48,7 @@ def keypress_foreign(data): # Process incoming messsage
     if data=='xOneFinished':
         otherFinished=True
     if data=='xAllFinished':
-        nextLevel()
+        levelUp()
 top.bind("<Key>",keypress_local)
 list=Thread(target=listen)
 list.daemon=True
@@ -127,7 +127,7 @@ def addFood():
     global columns
     global rows
     global foodlist
-    
+    foodlist = []
     while True:
         #Choses a random location
         chosen = (random.randint(2,rows-3),random.randint(2,columns-3))
@@ -198,8 +198,9 @@ def game():
         send("xOneFinished")
         if otherFinished==True:
             send("xAllFinished")
-            nextLevel()
-        
+            levelUp()
+
+        print "Game nearly Won!"
         root = Tk()
         label = Label(root, text="Game nearly Won!")
         label.pack()
@@ -348,11 +349,14 @@ def createWalls(level):
         sGrid[wall[0]][wall[1]].configure(image = grave)
 
 def levelUp():
+    otherFinished=False
     global walls
     global monsters
     global level
     global snake
-    sGrid[snake[0]][snake[1]].configure(image = grass)
+    for row in sGrid:
+        for square in row:
+            square.configure(image = grass)
     snake = (1,1)
     level += 1
     levellabel.configure(text = "Level: " + str(level))
@@ -361,9 +365,6 @@ def levelUp():
     foodlist = []
     addFood()
     
-    
-def nextLevel():
-    otherFinished=False
         
 columns = 15
 rows = 10
