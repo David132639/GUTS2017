@@ -1,4 +1,4 @@
-##Version 1.21 SOHVA
+##Version 1.22 SOHVA
 import Tkinter
 import time
 import random
@@ -184,13 +184,15 @@ def game():
 #Functions to turn the snake
 #If the snake is already moving to the same or opposite direction, nothing happens
 ##Version 1.2 SOHVA ADDED MOVES VARIABLE FOR DECIDING WHETHER PLAYER MOVES OR NOT
+##Version 1.22 SOHVA FIXED A BUG WITH THE SNAKE MOVEMENT
 def turnRight(event):
     global direction
     global new_direction
     global moves
     global movesOnce
-    if direction[0] != 0:
-        new_direction = (0,1)
+##    if direction[0] != 0:
+##        new_direction = (0,1)
+    new_direction = (0,1)
     moves = True
     movesOnce = True
     
@@ -200,8 +202,9 @@ def turnLeft(event):
     global new_direction
     global moves
     global movesOnce
-    if direction[0] != 0:
-        new_direction = (0,-1)
+##    if direction[0] != 0:
+##        new_direction = (0,-1)
+    new_direction = (0,-1)
     moves = True
     movesOnce = True
 
@@ -210,8 +213,9 @@ def turnUp(event):
     global new_direction
     global moves
     global movesOnce
-    if direction[1] != 0:
-        new_direction = (-1,0)
+##    if direction[1] != 0:
+##        new_direction = (-1,0)
+    new_direction = (-1,0)
     moves = True
     movesOnce = True
 
@@ -220,8 +224,9 @@ def turnDown(event):
     global new_direction
     global moves
     global movesOnce
-    if direction[1] != 0:
-        new_direction = (1,0)
+##    if direction[1] != 0:
+##        new_direction = (1,0)
+    new_direction = (1,0)
     moves = True
     movesOnce = True
 
