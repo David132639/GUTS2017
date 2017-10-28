@@ -54,7 +54,7 @@ def keypress_foreign(data): # Process incoming messsage
         updateNextButton = True
     if data[:8]=='xLevelUp':
         if int(data[8:]) != level:
-            levelUp()
+            goToNextLevel = True
 top.bind("<Key>",keypress_local)
 list=Thread(target=listen)
 list.daemon=True
@@ -144,6 +144,7 @@ def addFood():
     
 def game():
     global otherFinished
+    global goToNextLevel
     #Makes the snake move
     global snake
     global direction
@@ -179,9 +180,6 @@ def game():
         monloc = monster.getLoc()
         sGrid[monloc[0]][monloc[1]].configure(image = monsterImage)
 
-        
-
-    
     loc = snake
     #Update the location
     if moves or movesOnce:
@@ -260,6 +258,10 @@ def game():
         nextButton.configure(state = "normal")
         pause()
         updateNextButton = False
+
+    if goToNextLevel:
+        levelUp()
+        goToNextLevel = False
 
 
 #Functions to turn the snake
@@ -406,6 +408,8 @@ movesOnce = False
 otherFinished=False
 
 updateNextButton = False
+goToNextLevel = False
+
 quitButton = Tkinter.Button(top,text="Quit",command=top.destroy)
 quitButton.grid(row = 0, column = columns + 1,rowspan=2)
 newButton = Tkinter.Button(top,text="New Game", command = newGame)
