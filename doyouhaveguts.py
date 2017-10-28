@@ -99,6 +99,7 @@ def newGame():
     global new_direction
     global foodlist
     global level
+    
     level = 1
     sGrid[snake[0]][snake[1]].configure(image = snakeright)
     createSnake()
@@ -139,6 +140,7 @@ def addFood():
     
     
 def game():
+    
     global otherFinished
     #Makes the snake move
     global snake
@@ -167,7 +169,7 @@ def game():
     ##Adding wall 1.5 Sohva
     global walls
     sGrid[finish[0]][finish[1]].configure(image = trophy)
-
+    game_on = True
     for monster in monsters:
         monloc = monster.getLoc()
         sGrid[monloc[0]][monloc[1]].configure(image = grass)
@@ -311,6 +313,8 @@ def pause():
     global game_on
     game_on = not game_on
 
+    
+
 ##VERSION 1.2 SOHVA STOPS PLAYER MOVEMENT
 def stop():
     global moves
@@ -325,6 +329,7 @@ def createWalls(level):
 
 def levelUp():
     global otherFinished
+    global nextButton
     otherFinished=False
     global walls
     global monsters
@@ -333,6 +338,9 @@ def levelUp():
     for row in sGrid:
         for square in row:
             square.configure(image = grass)
+    nextButton.config(state="disabled")
+    pause()
+    game_on = True
     snake = (1,1)
     level += 1
     levellabel.configure(text = "Level: " + str(level))
@@ -341,8 +349,7 @@ def levelUp():
     foodlist = []
     addFood()
     
-    nextButton.config(state="disabled")
-    pause()
+
 
 #Gives the locations in which the monsters can be
 def giveMonLocs(monsters):
