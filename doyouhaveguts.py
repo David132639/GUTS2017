@@ -61,7 +61,7 @@ import monster
 
 #Initialize images
 ##Changed pictures 1.31 SOHVA
-grass = ImageTk.PhotoImage(file = "grey_bg.png")
+grass = ImageTk.PhotoImage(file = "background.png")
 foodimage = ImageTk.PhotoImage(file = "food.png")
 snakeskin = ImageTk.PhotoImage(file = "snake.png")
 snakeleft = ImageTk.PhotoImage(file = "pumpkin2.png")
@@ -196,15 +196,21 @@ def game():
 
     if newloc == finish:
         send("xOneFinished")
+
+        ###FOR TESTING
+        otherFinished = True
+        ###
+        
         if otherFinished==True:
             send("xAllFinished")
             levelUp()
 
         print "Game nearly Won!"
-        root = Tk()
-        label = Label(root, text="Game nearly Won!")
-        label.pack()
-        root.mainloop()
+##1.7 Commented out
+##        root = Tk()
+##        label = Label(root, text="Game nearly Won!")
+##        label.pack()
+##        root.mainloop()
 
         #print "Game nearly Won!"
 
@@ -380,7 +386,7 @@ sGrid = []
 for rownum in range(rows):
     row = []
     for colnum in range(columns):
-        label = Tkinter.Label(top, image = grass, bg = "grey")
+        label = Tkinter.Label(top, image = grass, bg = "#6d6764")
         #label = Tkinter.Label(top, bitmap="gray12", bg = "#e8e8e8")
         row += [label]
         label.grid(row = rownum+1, column = colnum)
