@@ -8,6 +8,9 @@ from PIL import ImageTk
 
 #######################
 m=socket.socket(socket.AF_INET,socket.SOCK_DGRAM)
+with open("ip.txt") as f:
+    opponent=f.readline()
+print opponent
 top=Tkinter.Tk()
 def listen():
     r=socket.socket(socket.AF_INET,socket.SOCK_DGRAM)
@@ -17,8 +20,9 @@ def listen():
             keypress_foreign(data)
     r.close
 def keypress_local(event):
-    m.sendto(event.keysym,("127.0.0.1",5502))
+    m.sendto(event.keysym,(str(opponent),5501))
 def keypress_foreign(data):
+    print data
     if data=='Up' or data=='w':
         turnUp()
         stop()
@@ -31,7 +35,10 @@ def keypress_foreign(data):
     if data=='Right' or data=='d':
         turnRight()
         stop()
-#top.bind("<Key>",keypress_local)
+    if data=='xPA':
+        pass
+#       example of non-key communication
+top.bind("<Key>",keypress_local)
 list=Thread(target=listen)
 list.daemon=True
 list.start()
