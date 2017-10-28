@@ -1,4 +1,4 @@
-##Version 1.3 SOHVA
+##Version 1.31 SOHVA
 import Tkinter
 import time
 import random
@@ -11,18 +11,19 @@ import monster
 top = Tkinter.Tk()
 
 #Initialize images
+##Changed pictures 1.31 SOHVA
 grass = ImageTk.PhotoImage(file = "grass.png")
 foodimage = ImageTk.PhotoImage(file = "food.png")
 snakeskin = ImageTk.PhotoImage(file = "snake.png")
-snakeleft = ImageTk.PhotoImage(file = "snakeleft.png")
-snakeup = ImageTk.PhotoImage(file = "snakeup.png")
-snakeright = ImageTk.PhotoImage(file = "snakeright.png")
-snakedown = ImageTk.PhotoImage(file = "snakedown.png")
-snakelefteat = ImageTk.PhotoImage(file = "snakelefteat.png")
-snakeupeat = ImageTk.PhotoImage(file = "snakeupeat.png")
-snakerighteat = ImageTk.PhotoImage(file = "snakerighteat.png")
-snakedowneat = ImageTk.PhotoImage(file = "snakedowneat.png")
-monsterImage = ImageTk.PhotoImage(file = "trophy.png")
+snakeleft = ImageTk.PhotoImage(file = "pumpkin.png")
+snakeup = ImageTk.PhotoImage(file = "pumpkin.png")
+snakeright = ImageTk.PhotoImage(file = "pumpkin.png")
+snakedown = ImageTk.PhotoImage(file = "pumpkin.png")
+snakelefteat = ImageTk.PhotoImage(file = "pumpkin.png")
+snakeupeat = ImageTk.PhotoImage(file = "pumpkin.png")
+snakerighteat = ImageTk.PhotoImage(file = "pumpkin.png")
+snakedowneat = ImageTk.PhotoImage(file = "pumpkin.png")
+monsterImage = ImageTk.PhotoImage(file = "ghost.png")
 
 def get_score():
     global highscore
