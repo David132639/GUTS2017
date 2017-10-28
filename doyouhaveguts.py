@@ -203,7 +203,7 @@ def game():
         send("xOneFinished")
 
         ###FOR TESTING
-        otherFinished = True
+#        otherFinished = True
         ###
         
         if otherFinished==True:
