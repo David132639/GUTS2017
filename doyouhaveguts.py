@@ -61,17 +61,17 @@ import monster
 
 #Initialize images
 ##Changed pictures 1.31 SOHVA
-grass = ImageTk.PhotoImage(file = "grass.png")
+grass = ImageTk.PhotoImage(file = "grey_bg.png")
 foodimage = ImageTk.PhotoImage(file = "food.png")
 snakeskin = ImageTk.PhotoImage(file = "snake.png")
-snakeleft = ImageTk.PhotoImage(file = "pumpkin.png")
-snakeup = ImageTk.PhotoImage(file = "pumpkin.png")
-snakeright = ImageTk.PhotoImage(file = "pumpkin.png")
-snakedown = ImageTk.PhotoImage(file = "pumpkin.png")
-snakelefteat = ImageTk.PhotoImage(file = "pumpkin.png")
-snakeupeat = ImageTk.PhotoImage(file = "pumpkin.png")
-snakerighteat = ImageTk.PhotoImage(file = "pumpkin.png")
-snakedowneat = ImageTk.PhotoImage(file = "pumpkin.png")
+snakeleft = ImageTk.PhotoImage(file = "pumpkin2.png")
+snakeup = ImageTk.PhotoImage(file = "pumpkin2.png")
+snakeright = ImageTk.PhotoImage(file = "pumpkin2.png")
+snakedown = ImageTk.PhotoImage(file = "pumpkin2.png")
+snakelefteat = ImageTk.PhotoImage(file = "happy_pumpkin.png")
+snakeupeat = ImageTk.PhotoImage(file = "happy_pumpkin.png")
+snakerighteat = ImageTk.PhotoImage(file = "happy_pumpkin.png")
+snakedowneat = ImageTk.PhotoImage(file = "happy_pumpkin.png")
 monsterImage = ImageTk.PhotoImage(file = "ghost.png")
 
 ##Adding finish 1.4 Sohva
@@ -107,7 +107,7 @@ def newGame():
     get_score()
     for row in sGrid:
         for item in row:
-            item.configure(image = grass, bg = "green")
+            item.configure(image = grass, bg = "grey")
     createSnake()
     global numFood
     numFood = random.randint(1,3)
@@ -380,7 +380,7 @@ sGrid = []
 for rownum in range(rows):
     row = []
     for colnum in range(columns):
-        label = Tkinter.Label(top, image = grass, bg = "green")
+        label = Tkinter.Label(top, image = grass, bg = "grey")
         #label = Tkinter.Label(top, bitmap="gray12", bg = "#e8e8e8")
         row += [label]
         label.grid(row = rownum+1, column = colnum)
