@@ -31,6 +31,7 @@ def keypress_local(event):
 def keypress_foreign(data): # Process incoming messsage
     print data
     global updateNextButton
+    global level
     if data=='Up' or data=='w':
         turnUp()
         stop()
@@ -51,6 +52,9 @@ def keypress_foreign(data): # Process incoming messsage
         otherFinished=True
     if data=='xAllFinished':
         updateNextButton = True
+    if data[:8]=='xLevelUp':
+        if int(data[8:]) != level:
+            levelUp()
 top.bind("<Key>",keypress_local)
 list=Thread(target=listen)
 list.daemon=True
@@ -326,6 +330,7 @@ def createWalls(level):
 def levelUp():
     global otherFinished
     otherFinished=False
+    
     global walls
     global monsters
     global level
@@ -335,13 +340,14 @@ def levelUp():
             square.configure(image = grass)
     snake = (1,1)
     level += 1
+    send("xLevelUp" + str(level))
     levellabel.configure(text = "Level: " + str(level))
     monsters = monstercreator.createMonsters(level)
     createWalls(level)
     foodlist = []
     addFood()
     
-    nextButton.config(state="disabled")
+    nextButton.configure(state="disabled")
     pause()
 
 #Gives the locations in which the monsters can be
@@ -400,7 +406,6 @@ movesOnce = False
 otherFinished=False
 
 updateNextButton = False
-global nextButton
 quitButton = Tkinter.Button(top,text="Quit",command=top.destroy)
 quitButton.grid(row = 0, column = columns + 1,rowspan=2)
 newButton = Tkinter.Button(top,text="New Game", command = newGame)
