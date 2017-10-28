@@ -30,7 +30,7 @@ def keypress_local(event):
     m.sendto(event.keysym,(str(opponent),5505))
 def keypress_foreign(data): # Process incoming messsage
     print data
-    global nextButton
+    global updateNextButton
     if data=='Up' or data=='w':
         turnUp()
         stop()
@@ -50,8 +50,7 @@ def keypress_foreign(data): # Process incoming messsage
         global otherFinished
         otherFinished=True
     if data=='xAllFinished':
-        nextButton.configure(state="normal")
-        pause()
+        updateNextButton = True
 top.bind("<Key>",keypress_local)
 list=Thread(target=listen)
 list.daemon=True
@@ -145,6 +144,7 @@ def game():
     global highscore
     global numFood
     global foodlist
+    global updateNextButton
 
     global level
     createWalls(level)
@@ -248,6 +248,11 @@ def game():
         else:
             snakehead = snakedown
     sGrid[newloc[0]][newloc[1]].configure(image = snakehead)
+
+    if updateNextButton:
+        nextButton.configure(state = "normal")
+        pause()
+        updateNextButton = False
 
 
 #Functions to turn the snake
@@ -388,6 +393,8 @@ moves = False
 movesOnce = False
 
 otherFinished=False
+
+updateNextButton = False
 
 quitButton = Tkinter.Button(top,text="Quit",command=top.destroy)
 quitButton.grid(row = 0, column = columns + 1,rowspan=2)
