@@ -8,10 +8,6 @@ import socket
 from threading import Thread
 from PIL import ImageTk
 
-##Music
-p = vlc.MediaPlayer("music.mp3")
-p.play()
-
 ##Adds walls
 import wallcreator
 
