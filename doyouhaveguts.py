@@ -84,12 +84,6 @@ trophy = ImageTk.PhotoImage(file = "trophy.png")
 ##Adding wall 1.5 SOHVA
 grave = ImageTk.PhotoImage(file = "grave.png")
 
-def get_score():
-    global highscore
-    scores = open("snake_high_score.txt","r")
-    highscore = int(scores.readline())
-    scores.close()
-
 #Creates the initial snake    
 def createSnake():
     global snake
