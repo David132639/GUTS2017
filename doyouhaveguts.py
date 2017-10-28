@@ -131,6 +131,8 @@ def newGame():
     for i in range (0, numFood):
         addFood()
         foodlist.append(food)
+    for food in foodlist:
+        sGrid[food[0]][food[1]].configure(image = foodimage)
     
     game_on = True
     direction = (0,-1)
@@ -153,7 +155,6 @@ def addFood():
         if chosen != snake and chosen not in walls and chosen != finish and chosen not in monLocs:
             food = chosen
             foodlist.append(food)
-            sGrid[food[0]][food[1]].configure(image = foodimage)
             break
     
     
@@ -338,6 +339,7 @@ def levelUp():
     global otherFinished
     global nextButton
     otherFinished=False
+    global foodlist
     global walls
     global monsters
     global level
@@ -360,6 +362,8 @@ def levelUp():
     createWalls(level)
     foodlist = []
     addFood()
+    for food in foodlist:
+        sGrid[food[0]][food[1]].configure(image = foodimage)
     
     nextButton.configure(state="disabled")
 
@@ -369,6 +373,10 @@ def giveMonLocs(monsters):
     for monster in monsters:
         locs += monster.getRoute()
     return locs
+
+def giveNextLocs(snake):
+    return [(snake[0]-1,snake[1]),(snake[0]+1,snake[1]),\
+            (snake[0],snake[1]-1),(snake[0],snake[1]+1)]
         
 columns = 15
 rows = 10
@@ -413,6 +421,8 @@ createWalls(1)
 
 #Place the food
 addFood()
+for food in foodlist:
+    sGrid[food[0]][food[1]].configure(image = foodimage)
 
 #Tells how to change coordinates
 #up = (1,0); down = (-1,0); left = (0,-1); right = (0,1)
