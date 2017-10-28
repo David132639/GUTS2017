@@ -70,17 +70,16 @@ import monster
 #Initialize images
 ##Changed pictures 1.31 SOHVA
 grass = ImageTk.PhotoImage(file = "background.png")
-foodimage = ImageTk.PhotoImage(file = "spider.png")
-snakeskin = ImageTk.PhotoImage(file = "snake.png")
-snakeleft = ImageTk.PhotoImage(file = "pumpkin2.png")
-snakeup = ImageTk.PhotoImage(file = "pumpkin2.png")
-snakeright = ImageTk.PhotoImage(file = "pumpkin2.png")
-snakedown = ImageTk.PhotoImage(file = "pumpkin2.png")
-snakelefteat = ImageTk.PhotoImage(file = "happy_pumpkin.png")
-snakeupeat = ImageTk.PhotoImage(file = "happy_pumpkin.png")
-snakerighteat = ImageTk.PhotoImage(file = "happy_pumpkin.png")
-snakedowneat = ImageTk.PhotoImage(file = "happy_pumpkin.png")
-monsterImage = ImageTk.PhotoImage(file = "ghost.png")
+foodimage = ImageTk.PhotoImage(file = "spiderBG.png")
+snakeleft = ImageTk.PhotoImage(file = "pumpkin2BG.png")
+snakeup = ImageTk.PhotoImage(file = "pumpkin2BG.png")
+snakeright = ImageTk.PhotoImage(file = "pumpkin2BG.png")
+snakedown = ImageTk.PhotoImage(file = "pumpkin2BG.png")
+snakelefteat = ImageTk.PhotoImage(file = "happy_pumpkinBG.png")
+snakeupeat = ImageTk.PhotoImage(file = "happy_pumpkinBG.png")
+snakerighteat = ImageTk.PhotoImage(file = "happy_pumpkinBG.png")
+snakedowneat = ImageTk.PhotoImage(file = "happy_pumpkinBG.png")
+monsterImage = ImageTk.PhotoImage(file = "ghostBG.png")
 
 ##Adding finish 1.4 Sohva
 trophy = ImageTk.PhotoImage(file = "trophy.png")
