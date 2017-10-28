@@ -198,7 +198,13 @@ def game():
         if otherFinished==True:
             send("xAllFinished")
             nextLevel()
-        print "Game nearly Won!"
+        
+        root = Tk()
+        label = Label(root, text="Game nerly Won!")
+        label.pack()
+        root.mainloop()
+
+        #print "Game nearly Won!"
 
 ## COMMENTED OUT 1.1 SOHVA
 ##    if newloc in snake:
