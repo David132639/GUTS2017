@@ -47,7 +47,7 @@ def keypress_foreign(data): # Process incoming messsage
     if data=='xOneFinished':
         otherFinished=True
     if data=='xAllFinished':
-        nextLevel()
+        levelUp()
 top.bind("<Key>",keypress_local)
 list=Thread(target=listen)
 list.daemon=True
@@ -197,7 +197,8 @@ def game():
         send("xOneFinished")
         if otherFinished==True:
             send("xAllFinished")
-            nextLevel()
+            levelUp()
+    
         print "Game nearly Won!"
 
 ## COMMENTED OUT 1.1 SOHVA
@@ -341,6 +342,7 @@ def createWalls(level):
         sGrid[wall[0]][wall[1]].configure(image = grave)
 
 def levelUp():
+    otherFinished=False
     global walls
     global monsters
     global level
@@ -354,9 +356,6 @@ def levelUp():
     foodlist = []
     addFood()
     
-    
-def nextLevel():
-    otherFinished=False
         
 columns = 15
 rows = 10
