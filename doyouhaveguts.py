@@ -1,8 +1,12 @@
-##Version 1.22 SOHVA
+##Version 1.3 SOHVA
 import Tkinter
 import time
 import random
 import ImageTk
+
+##Importing monster 1.3 SOHVA
+import monstercreator
+import monster
 
 top = Tkinter.Tk()
 
@@ -18,6 +22,7 @@ snakelefteat = ImageTk.PhotoImage(file = "snakelefteat.png")
 snakeupeat = ImageTk.PhotoImage(file = "snakeupeat.png")
 snakerighteat = ImageTk.PhotoImage(file = "snakerighteat.png")
 snakedowneat = ImageTk.PhotoImage(file = "snakedowneat.png")
+monsterImage = ImageTk.PhotoImage(file = "trophy.png")
 
 def get_score():
     global highscore
@@ -77,6 +82,7 @@ def addFood():
             sGrid[food[0]][food[1]].configure(image = foodimage)
             break
     
+    
 def game():
     #Makes the snake move
     global snake
@@ -92,6 +98,18 @@ def game():
     global moves
     global movesOnce
 
+    ##Adding monsters 1.3 SOHVA
+    global monsters
+
+    for monster in monsters:
+        monloc = monster.getLoc()
+        sGrid[monloc[0]][monloc[1]].configure(image = grass)
+        monster.move()
+        monloc = monster.getLoc()
+        sGrid[monloc[0]][monloc[1]].configure(image = monsterImage)
+         
+        
+
     
     loc = snake
     #Update the location
@@ -100,6 +118,12 @@ def game():
         movesOnce = False
     else:
         newloc = loc
+
+    ##Check for the collision with monster 1.3 SOHVA
+    for monster in monsters:
+        if newloc == monster.getLoc():
+            print "Hit a monster"
+            newloc = (1,1)
 
 ## COMMENTED OUT 1.1 SOHVA
 ##    if newloc in snake:
@@ -259,7 +283,7 @@ for rownum in range(rows):
         label.grid(row = rownum+1, column = colnum)
     sGrid += [row]
 
-
+monsters = monstercreator.createMonsters(1)
 createSnake()
 get_score()
 
