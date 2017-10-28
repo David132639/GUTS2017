@@ -48,7 +48,8 @@ def keypress_foreign(data): # Process incoming messsage
     if data=='xOneFinished':
         otherFinished=True
     if data=='xAllFinished':
-        levelUp()
+        nextButton.configure(state="normal")
+        pause()
 top.bind("<Key>",keypress_local)
 list=Thread(target=listen)
 list.daemon=True
@@ -204,7 +205,6 @@ def game():
         
         if otherFinished==True:
             send("xAllFinished")
-            levelUp()
 
         print "Game nearly Won!"
 ##1.7 Commented out
@@ -371,6 +371,8 @@ def levelUp():
     createWalls(level)
     foodlist = []
     addFood()
+    nextButton.configure(state="disabled")
+    pause()
     
         
 columns = 15
@@ -379,7 +381,7 @@ game_on = True
 snake = []
 highscore = 0
 foodlist=[]
-finish=(rows-2, columns-2)
+finish=(rows-3, columns-3)
 
 
 #Create the grid 
@@ -426,8 +428,8 @@ quitButton = Tkinter.Button(top,text="Quit",command=top.destroy)
 quitButton.grid(row = 0, column = columns + 1,rowspan=2)
 newButton = Tkinter.Button(top,text="New Game", command = newGame)
 newButton.grid(row=1,column=columns+1,rowspan=2)
-newButton = Tkinter.Button(top,text="Next Level", command = levelUp)
-newButton.grid(row=2,column=columns+1,rowspan=2)
+nextButton = Tkinter.Button(top,text="Next Level", command = levelUp, state="disabled")
+nextButton.grid(row=2,column=columns+1,rowspan=2)
 
 #Bind the keys
 #top.bind( "<KeyPress-Down>", turnDown)
@@ -460,6 +462,3 @@ while True:
         top.update_idletasks()
         top.update()
     direction = new_direction
-
-for item in snake:
-    sGrid[item[0]][item[1]].configure(bg="red")
