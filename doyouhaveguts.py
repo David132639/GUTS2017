@@ -93,8 +93,6 @@ def createSnake():
     snake = (1,1)
 
 def newGame():
-    global otherFinished
-    otherFinished=False
     global snake
     global sGrid
     global food
@@ -141,6 +139,8 @@ def addFood():
     
     
 def game():
+    global otherFinished
+    otherFinished=False
     #Makes the snake move
     global snake
     global direction
