@@ -1,5 +1,6 @@
 ##Version 1.6 SOHVA New level
 import Tkinter
+from Tkinter import *
 import time
 import random
 import socket
