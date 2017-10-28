@@ -2,13 +2,44 @@
 import Tkinter
 import time
 import random
-import ImageTk
+import socket
+from threading import Thread
+from PIL import ImageTk
+
+#######################
+m=socket.socket(socket.AF_INET,socket.SOCK_DGRAM)
+top=Tkinter.Tk()
+def listen():
+    r=socket.socket(socket.AF_INET,socket.SOCK_DGRAM)
+    r.bind(("0.0.0.0",5501))
+    while True:
+            data,addr=r.recvfrom(1024)
+            keypress_foreign(data)
+    r.close
+def keypress_local(event):
+    m.sendto(event.keysym,("127.0.0.1",5502))
+def keypress_foreign(data):
+    if data=='Up' or data=='w':
+        turnUp()
+        stop()
+    if data=='Down' or data=='s':
+        turnDown()
+        stop()
+    if data=='Left' or data=='a':
+        turnLeft()
+        stop()
+    if data=='Right' or data=='d':
+        turnRight()
+        stop()
+#top.bind("<Key>",keypress_local)
+list=Thread(target=listen)
+list.daemon=True
+list.start()
+#######################
 
 ##Importing monster 1.3 SOHVA
 import monstercreator
 import monster
-
-top = Tkinter.Tk()
 
 #Initialize images
 ##Changed pictures 1.31 SOHVA
@@ -210,7 +241,7 @@ def game():
 #If the snake is already moving to the same or opposite direction, nothing happens
 ##Version 1.2 SOHVA ADDED MOVES VARIABLE FOR DECIDING WHETHER PLAYER MOVES OR NOT
 ##Version 1.22 SOHVA FIXED A BUG WITH THE SNAKE MOVEMENT
-def turnRight(event):
+def turnRight():
     global direction
     global new_direction
     global moves
@@ -222,7 +253,7 @@ def turnRight(event):
     movesOnce = True
     
 
-def turnLeft(event):
+def turnLeft():
     global direction
     global new_direction
     global moves
@@ -233,7 +264,7 @@ def turnLeft(event):
     moves = True
     movesOnce = True
 
-def turnUp(event):
+def turnUp():
     global direction
     global new_direction
     global moves
@@ -244,7 +275,7 @@ def turnUp(event):
     moves = True
     movesOnce = True
 
-def turnDown(event):
+def turnDown():
     global direction
     global new_direction
     global moves
@@ -255,12 +286,12 @@ def turnDown(event):
     moves = True
     movesOnce = True
 
-def pause(event):
+def pause():
     global game_on
     game_on = not game_on
 
 ##VERSION 1.2 SOHVA STOPS PLAYER MOVEMENT
-def stop(event):
+def stop():
     global moves
     moves = False
         
@@ -312,25 +343,25 @@ newButton = Tkinter.Button(top,text="New Game", command = newGame)
 newButton.grid(row=1,column=columns+1,rowspan=2)
 
 #Bind the keys
-top.bind( "<KeyPress-Down>", turnDown)
-top.bind( "<KeyPress-s>", turnDown)
-top.bind( "<KeyPress-Up>", turnUp)
-top.bind( "<KeyPress-w>", turnUp)
-top.bind( "<KeyPress-Left>", turnLeft)
-top.bind( "<KeyPress-a>", turnLeft)
-top.bind( "<KeyPress-Right>", turnRight)
-top.bind( "<KeyPress-d>", turnRight)
-top.bind( "<space>", pause)
+#top.bind( "<KeyPress-Down>", turnDown)
+#top.bind( "<KeyPress-s>", turnDown)
+#top.bind( "<KeyPress-Up>", turnUp)
+#top.bind( "<KeyPress-w>", turnUp)
+#top.bind( "<KeyPress-Left>", turnLeft)
+#top.bind( "<KeyPress-a>", turnLeft)
+#top.bind( "<KeyPress-Right>", turnRight)
+#top.bind( "<KeyPress-d>", turnRight)
+#top.bind( "<space>", pause)
 
 ##Key releases VERSION 1.2 SOHVA
-top.bind( "<KeyRelease-Down>", stop)
-top.bind( "<KeyRelease-s>", stop)
-top.bind( "<KeyRelease-Up>", stop)
-top.bind( "<KeyRelease-w>", stop)
-top.bind( "<KeyRelease-Left>", stop)
-top.bind( "<KeyRelease-a>", stop)
-top.bind( "<KeyRelease-Right>", stop)
-top.bind( "<KeyRelease-d>", stop)
+#top.bind( "<KeyRelease-Down>", stop)
+#top.bind( "<KeyRelease-s>", stop)
+#top.bind( "<KeyRelease-Up>", stop)
+#top.bind( "<KeyRelease-w>", stop)
+#top.bind( "<KeyRelease-Left>", stop)
+#top.bind( "<KeyRelease-a>", stop)
+#top.bind( "<KeyRelease-Right>", stop)
+#top.bind( "<KeyRelease-d>", stop)
 
 while True:
     if game_on:
