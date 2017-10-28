@@ -205,9 +205,9 @@ def game():
     if newloc == finish:
         send("xOneFinished")
 
-##        ###FOR TESTING
-##        otherFinished = True
-##        ###
+        ###FOR TESTING
+        otherFinished = True
+        ###
         
         if otherFinished==True:
             send("xAllFinished")
