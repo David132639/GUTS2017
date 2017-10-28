@@ -30,6 +30,7 @@ def keypress_local(event):
     m.sendto(event.keysym,(str(opponent),5501))
 def keypress_foreign(data): # Process incoming messsage
     print data
+    global nextButton
     if data=='Up' or data=='w':
         turnUp()
         stop()
