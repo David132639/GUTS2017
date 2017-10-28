@@ -1,4 +1,4 @@
-##Version 1.31 SOHVA
+##Version 1.4 SOHVA
 import Tkinter
 import time
 import random
@@ -55,6 +55,9 @@ snakeupeat = ImageTk.PhotoImage(file = "pumpkin.png")
 snakerighteat = ImageTk.PhotoImage(file = "pumpkin.png")
 snakedowneat = ImageTk.PhotoImage(file = "pumpkin.png")
 monsterImage = ImageTk.PhotoImage(file = "ghost.png")
+
+##Adding finish 1.4 Sohva
+trophy = ImageTk.PhotoImage(file = "trophy.png")
 
 def get_score():
     global highscore
@@ -133,6 +136,10 @@ def game():
     ##Adding monsters 1.3 SOHVA
     global monsters
 
+    ##Adding finish 1.4 Sohva
+    global finish
+    sGrid[finish[0]][finish[1]].configure(image = trophy)
+
     for monster in monsters:
         monloc = monster.getLoc()
         sGrid[monloc[0]][monloc[1]].configure(image = grass)
@@ -156,6 +163,9 @@ def game():
         if newloc == monster.getLoc():
             print "Hit a monster"
             newloc = (1,1)
+
+    if newloc == finish:
+        print "Game Won!"
 
 ## COMMENTED OUT 1.1 SOHVA
 ##    if newloc in snake:
@@ -314,6 +324,7 @@ for rownum in range(rows):
         row += [label]
         label.grid(row = rownum+1, column = colnum)
     sGrid += [row]
+
 
 monsters = monstercreator.createMonsters(1)
 createSnake()
