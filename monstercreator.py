@@ -10,3 +10,8 @@ def createMonsters(case):
         monsters += [monster.Monster((3,1),[(3,1),(3,2),(2,2),(2,1)])]
         monsters += [monster.Monster((7,1),[(7,1),(7,2),(6,2),(6,1)])]
         return monsters
+    elif case == 2:
+        monsters += [monster.Monster((3,1),[(3,1),(3,2),(2,2),(2,1)])]
+        monsters += [monster.Monster((7,1),[(7,1),(7,2),(6,2),(6,1)])]
+        monsters += [monster.Monster((7,5),[(7,5),(7,4)])]
+        return monsters
