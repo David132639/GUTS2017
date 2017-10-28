@@ -46,6 +46,7 @@ def keypress_foreign(data): # Process incoming messsage
         print "Partner hit a monster"
         newloc = (1,1)
     if data=='xOneFinished':
+        global otherFinished
         otherFinished=True
     if data=='xAllFinished':
         nextButton.configure(state="normal")
@@ -143,7 +144,6 @@ def addFood():
     
 def game():
     global otherFinished
-    otherFinished=False
     #Makes the snake move
     global snake
     global direction
@@ -202,10 +202,9 @@ def game():
     if newloc == finish:
         send("xOneFinished")
 
-        ###FOR TESTING
-#        otherFinished = True
-        ###
-        
+##        ###FOR TESTING
+##        otherFinished = True
+##        ###
         if otherFinished==True:
             send("xAllFinished")
 
@@ -359,6 +358,7 @@ def createWalls(level):
         sGrid[wall[0]][wall[1]].configure(image = grave)
 
 def levelUp():
+    global otherFinished
     otherFinished=False
     global walls
     global monsters
@@ -424,6 +424,8 @@ new_direction = (0,-1)
 ## VERSION 1.2 SOHVA a boolean for the player movement
 moves = False
 movesOnce = False
+
+otherFinished=False
 
 quitButton = Tkinter.Button(top,text="Quit",command=top.destroy)
 quitButton.grid(row = 0, column = columns + 1,rowspan=2)
