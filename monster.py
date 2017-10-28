@@ -1,4 +1,5 @@
 ##VERSION 1.1 CHANGED NAME SOHVA
+##VERSION 1.2 FIXED A BUG SOHVA
 class Monster:
     def __init__(self, loc, route):
         ## loc is a tuple that is the location
@@ -11,7 +12,7 @@ class Monster:
         return str(self.loc)
 
     def getLoc(self):
-        return loc
+        return self.loc
 
     def setLoc(self, loc):
         self.loc = loc
@@ -19,4 +20,3 @@ class Monster:
     def move(self):
         self.index = ((self.index + 1)%len(self.route))
         self.loc = self.route[self.index]
-
