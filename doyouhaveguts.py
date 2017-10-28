@@ -63,7 +63,7 @@ import monster
 #Initialize images
 ##Changed pictures 1.31 SOHVA
 grass = ImageTk.PhotoImage(file = "background.png")
-foodimage = ImageTk.PhotoImage(file = "food.png")
+foodimage = ImageTk.PhotoImage(file = "spider.png")
 snakeskin = ImageTk.PhotoImage(file = "snake.png")
 snakeleft = ImageTk.PhotoImage(file = "pumpkin2.png")
 snakeup = ImageTk.PhotoImage(file = "pumpkin2.png")
