@@ -1,4 +1,4 @@
-##Gives a list of obstacles given by the case numbre
+##Gives a list of monster given by the case numbre
 
 import monster
 
