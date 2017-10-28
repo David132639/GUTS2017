@@ -41,8 +41,6 @@ list.start()
 import monstercreator
 import monster
 
-top = Tkinter.Tk()
-
 #Initialize images
 ##Changed pictures 1.31 SOHVA
 grass = ImageTk.PhotoImage(file = "grass.png")
