@@ -17,7 +17,7 @@ import monster
 import wallcreator
 
 pygame.mixer.init()
-pygame.mixer.music.load("res/game_music.wav")
+pygame.mixer.music.load("res/music.mp3")
 pygame.mixer.music.play(-1)
 
 # if(top.destroy):
