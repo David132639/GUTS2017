@@ -54,7 +54,8 @@ def createMonsters(case):
         route = []
         for i in range(2,10):
             route += [(1,i)]
+        route += [(1,9)]
         for i in [10,9,8,7,5,4,3,2,1]:
             route += [(1,i)]
-        monsters += [monster.Monster(1,2,route)]
+        monsters += [monster.Monster((1,2),route)]
     return monsters
