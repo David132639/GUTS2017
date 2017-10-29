@@ -338,7 +338,7 @@ def levelUp():
 	level += 1
 	send("xLevelUp" + str(level))
 	levellabel.configure(text="Level: " + str(level))
-	monsters = monstercreator.createMonsters(level)
+	monsters = createMonsters(level)
 	createWalls(level)
 	foodlist = []
 	addFood()
@@ -360,7 +360,10 @@ def giveNextLocs(pumpkin):
 	return [(pumpkin[0] - 1, pumpkin[1]), (pumpkin[0] + 1, pumpkin[1]), \
 			(pumpkin[0], pumpkin[1] - 1), (pumpkin[0], pumpkin[1] + 1)]
 
-
+def createMonsters(level):
+        global monsters
+        monsters = monstercreator.createMonsters(level)
+        
 columns = 15
 rows = 10
 game_on = True
@@ -385,8 +388,9 @@ for rownum in range(rows):
 		label.grid(row=rownum + 1, column=colnum)
 	sGrid += [row]
 
-monsters = monstercreator.createMonsters(1)
 createPumpkin()
+
+createMonsters(1)
 
 ##1.6 SOHVA adds the variable for level
 level = 1
