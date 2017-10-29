@@ -13,11 +13,8 @@ import pygame
 
 from newgame import *
 import monstercreator
-#import monstercreatorOther
 import monster
 import wallcreator
-#import wallcreatorOther
-
 
 pygame.mixer.init()
 pygame.mixer.music.load("res/music.mp3")
@@ -142,9 +139,7 @@ def addFood():
             break
 
 
-def refreshLives():
-    global liveslabel
-    liveslabel = Tkinter.Label(top, text=str(lives) + " lives left")
+
 
 
 def game():
@@ -208,9 +203,9 @@ def game():
     if newloc == finish:
         send("xOneFinished")
 
-##        ##FOR TESTING
-##        otherFinished = True
-##        ##
+        ###FOR TESTING
+        # otherFinished = True
+        ###
 
         if otherFinished == True:
             send("xAllFinished")
@@ -321,10 +316,6 @@ def createWalls(level):
     for wall in walls:
         sGrid[wall[0]][wall[1]].configure(image=grave)
 
-def createMonsters(level):
-        global monsters
-
-        monsters = monstercreator.createMonsters(level)
 
 def levelUp():
     global otherFinished
@@ -349,7 +340,7 @@ def levelUp():
     level += 1
     send("xLevelUp" + str(level))
     levellabel.configure(text="Level: " + str(level))
-    createMonsters(level)
+    monsters = createMonsters(level)
     createWalls(level)
     foodlist = []
     addFood()
@@ -371,7 +362,17 @@ def giveNextLocs(pumpkin):
     return [(pumpkin[0] - 1, pumpkin[1]), (pumpkin[0] + 1, pumpkin[1]), \
             (pumpkin[0], pumpkin[1] - 1), (pumpkin[0], pumpkin[1] + 1)]
 
-        
+def createMonsters(level):
+        global monsters
+        monsters = monstercreator.createMonsters(level)
+lives = 5
+liveslabel = Tkinter.Label(top, text=str(lives) + " lives left")
+
+def refreshLives():
+    global liveslabel
+    global lives
+    liveslabel.config(text=str(lives) + " lives left")
+    
 columns = 15
 rows = 10
 game_on = True
@@ -380,8 +381,12 @@ highscore = 0
 foodlist = []
 finish = (rows - 3, columns - 3)
 walls = []
-lives = 5
+
 refreshLives()
+
+
+
+    
 liveslabel.grid(row=0, columnspan=5, column=4)
 statelabel = Tkinter.Label(top, text="Have not won/lost yet.")
 statelabel.grid(row=0, columnspan=6, column=9)
