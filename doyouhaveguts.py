@@ -17,8 +17,10 @@ from newgame import *
 # createWalls and createMonsters
 
 import monstercreator
+#import monstercreatorOther
 import monster
 import wallcreator
+#import wallcreatorOther
 
 pygame.mixer.init()
 pygame.mixer.music.load("res/music.mp3")
@@ -237,9 +239,9 @@ def game():
     if newloc == finish:
         send("xOneFinished")
 
-        ###FOR TESTING
-        # otherFinished = True
-        ###
+##        ##FOR TESTING
+##        otherFinished = True
+##        ##
 
         if otherFinished == True:
             send("xAllFinished")
@@ -377,7 +379,7 @@ def levelUp():
     level += 1
     send("xLevelUp" + str(level))
     levellabel.configure(text="Level: " + str(level))
-    monsters = createMonsters(level)
+    createMonsters(level)
     createWalls(level)
     foodlist = []
     addFood()
