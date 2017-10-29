@@ -125,7 +125,8 @@ def newGame():
     global lives
 
     lives = 5
-    liveslabel.configure(text = "You have "+str(lives)+" attempts")
+    refreshLives()
+#    liveslabel.configure(text = "You have "+str(lives)+" attempts")
     monsterImage = monsterImages[random.randint(0,len(monsterImages)-1)]
 
     level = 1
