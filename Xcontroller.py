@@ -22,7 +22,7 @@ def keypress_local(event):
     print "Local:",repr(event.keysym)
     m.sendto(event.keysym,("127.0.0.1",5505))
     if event.keysym=='equal':
-        m.sendto('xPA',("127.0.0.1",5501))
+        m.sendto('xPA',("127.0.0.1",5505))
 
 def keypress_foreign(data):
     if data=='Up' or data=='w':
