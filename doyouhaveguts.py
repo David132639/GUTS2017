@@ -8,6 +8,10 @@ from PIL import ImageTk
 import pygame
 
 from newgame import *
+
+#If using other versions of the creator, change the names in the functions
+# createWalls and createMonsters
+
 import monstercreator
 import monster
 import wallcreator
@@ -342,6 +346,9 @@ def createWalls(level):
     for wall in walls:
         sGrid[wall[0]][wall[1]].configure(image=grave)
 
+def createMonsters(level):
+        global monsters
+        monsters = monstercreator.createMonsters(level)
 
 def levelUp():
     global otherFinished
@@ -388,9 +395,6 @@ def giveNextLocs(pumpkin):
     return [(pumpkin[0] - 1, pumpkin[1]), (pumpkin[0] + 1, pumpkin[1]), \
             (pumpkin[0], pumpkin[1] - 1), (pumpkin[0], pumpkin[1] + 1)]
 
-def createMonsters(level):
-        global monsters
-        monsters = monstercreator.createMonsters(level)
 lives = 5
 liveslabel = Tkinter.Label(top, text=str(lives) + " lives left")
 
