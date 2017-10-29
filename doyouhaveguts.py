@@ -49,15 +49,15 @@ def listen():
 	r.bind(("0.0.0.0", 5505))
 	while True:
 		data, addr = r.recvfrom(1024)
-		keypress_foreign(data)
+		keypressForeign(data)
 	r.close
 
 
-def keypress_local(event):
+def keypressLocal(event):
 	m.sendto(event.keysym, (str(opponent), 5505))
 
 
-def keypress_foreign(data):  # Process incoming messsage
+def keypressForeign(data):  # Process incoming messsage
 	print data
 	global updateNextButton
 	global level
@@ -88,7 +88,7 @@ def keypress_foreign(data):  # Process incoming messsage
 			print goToNextLevel, "Test1"
 
 
-top.bind("<Key>", keypress_local)
+top.bind("<Key>", keypressLocal)
 list = Thread(target=listen)
 list.daemon = True
 list.start()
