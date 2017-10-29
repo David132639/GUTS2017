@@ -80,10 +80,9 @@ def keypressForeign(data):  # Process incoming messsage
     if data == 'xDead':
         global lives
         lives -= 1
-        refreshLives()
         if lives == 0:
             dead()
-        print "Partner hit a monster"
+        print "Partner hit a monster", str(lives)
         newloc = (1, 1)
     if data == 'xOneFinished':
         global otherFinished
@@ -145,7 +144,7 @@ def addFood():
 
 def refreshLives():
     global liveslabel
-    liveslabel = Tkinter.Label(top, text="Your partner has " + str(lives) + " attempts")
+    liveslabel = Tkinter.Label(top, text=str(lives) + " lives left")
 
 
 def game():
