@@ -130,7 +130,7 @@ def newGame():
     global level
     global lives
 
-    lives = 5
+    lives = 7
 
     liveslabel.configure(text = "You have "+str(lives)+" attempts")
     for row in sGrid:
@@ -414,7 +414,7 @@ def giveNextLocs(pumpkin):
     return [(pumpkin[0] - 1, pumpkin[1]), (pumpkin[0] + 1, pumpkin[1]), \
             (pumpkin[0], pumpkin[1] - 1), (pumpkin[0], pumpkin[1] + 1)]
 
-lives = 5
+lives = 7
 liveslabel = Tkinter.Label(top, text=str(lives) + " lives left")
 
 def refreshLives():
