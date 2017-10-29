@@ -29,7 +29,7 @@ pygame.mixer.music.load("res/music.mp3")
 pygame.mixer.music.play(-1)
 
 top = Tkinter.Tk()
-#top.configure(background='blue')
+top.configure(background='light yellow')
 ####################### Network staff
 m = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
 with open("ip.txt") as f:
@@ -205,7 +205,7 @@ def game():
     global moves
     global movesOnce
     refreshLives()
-    statelabel.configure(text="")
+    statelabel.configure(text="Task: get a trophy")
 
     ##Adding monsters 1.3 SOHVA
     global monsters
@@ -419,7 +419,7 @@ def giveNextLocs(pumpkin):
             (pumpkin[0], pumpkin[1] - 1), (pumpkin[0], pumpkin[1] + 1)]
 
 lives = 7
-liveslabel = Tkinter.Label(top, text=str(lives) + " lives left")
+liveslabel = Tkinter.Label(top, text=str(lives) + " lives left", fg="brown", background='light yellow')
 
 def refreshLives():
     global liveslabel
@@ -441,7 +441,7 @@ refreshLives()
 
     
 liveslabel.grid(row=0, columnspan=5, column=4)
-statelabel = Tkinter.Label(top, text="", font="bold", fg="red")
+statelabel = Tkinter.Label(top, text="", font=("Helvetica", 10, "bold italic"), fg="brown", background='light yellow')
 statelabel.grid(row=0, columnspan=6, column=9)
 
 # Create the grid
@@ -461,7 +461,7 @@ createMonsters(1)
 ##1.6 SOHVA adds the variable for level
 level = 1
 
-levellabel = Tkinter.Label(top, text="Level: " + str(level))
+levellabel = Tkinter.Label(top, text="Level: " + str(level),fg="brown", background='light yellow')
 levellabel.grid(row=0, columnspan=5, column=0)
 
 createWalls(1)
@@ -486,11 +486,11 @@ updateNextButton = False
 goToNextLevel = False
 goToDead = False
 
-quitButton = Tkinter.Button(top, text="Quit", command=top.destroy)
+quitButton = Tkinter.Button(top, text="Quit",fg="brown", command=top.destroy, background='light yellow', relief = RIDGE, bd=3,highlightcolor="red")
 quitButton.grid(row=0, column=columns + 1, rowspan=2)
-newButton = Tkinter.Button(top, text="New Game", command=newGame)
+newButton = Tkinter.Button(top, text="New Game", fg="brown",command=newGame, background='light yellow', relief = RIDGE, bd=3,highlightcolor="red")
 newButton.grid(row=1, column=columns + 1, rowspan=2)
-nextButton = Tkinter.Button(top, text="Next Level", command=levelUp, state="disabled")
+nextButton = Tkinter.Button(top, text="Next Level", fg="brown",command=levelUp, state="disabled", background='light yellow', relief = RIDGE,  bd=3, highlightcolor="red")
 nextButton.grid(row=2, column=columns + 1, rowspan=2)
 
 
