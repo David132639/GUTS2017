@@ -13,8 +13,11 @@ import pygame
 
 from newgame import *
 import monstercreator
+#import monstercreatorOther
 import monster
 import wallcreator
+#import wallcreatorOther
+
 
 pygame.mixer.init()
 pygame.mixer.music.load("res/music.mp3")
@@ -206,9 +209,9 @@ def game():
     if newloc == finish:
         send("xOneFinished")
 
-        ###FOR TESTING
-        # otherFinished = True
-        ###
+##        ##FOR TESTING
+##        otherFinished = True
+##        ##
 
         if otherFinished == True:
             send("xAllFinished")
@@ -319,6 +322,10 @@ def createWalls(level):
     for wall in walls:
         sGrid[wall[0]][wall[1]].configure(image=grave)
 
+def createMonsters(level):
+        global monsters
+
+        monsters = monstercreator.createMonsters(level)
 
 def levelUp():
     global otherFinished
@@ -343,7 +350,7 @@ def levelUp():
     level += 1
     send("xLevelUp" + str(level))
     levellabel.configure(text="Level: " + str(level))
-    monsters = createMonsters(level)
+    createMonsters(level)
     createWalls(level)
     foodlist = []
     addFood()
@@ -365,9 +372,6 @@ def giveNextLocs(pumpkin):
     return [(pumpkin[0] - 1, pumpkin[1]), (pumpkin[0] + 1, pumpkin[1]), \
             (pumpkin[0], pumpkin[1] - 1), (pumpkin[0], pumpkin[1] + 1)]
 
-def createMonsters(level):
-        global monsters
-        monsters = monstercreator.createMonsters(level)
         
 columns = 15
 rows = 10
