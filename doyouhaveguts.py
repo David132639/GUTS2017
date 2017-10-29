@@ -205,7 +205,7 @@ def game():
     global moves
     global movesOnce
     refreshLives()
-    statelabel.configure(text="Task: get a trophy")
+    statelabel.configure(text="Task: get the trophies")
 
     ##Adding monsters 1.3 SOHVA
     global monsters
@@ -250,7 +250,7 @@ def game():
         send("xOneFinished")
 
         ##FOR TESTING
-        otherFinished = True
+        #otherFinished = True
         ##
 
         if otherFinished == True:
