@@ -7,8 +7,6 @@ from threading import Thread
 from PIL import ImageTk
 import pygame
 
-from newgame import *
-
 #If using other versions of the creator, change the names in the functions
 # createWalls and createMonsters
 
