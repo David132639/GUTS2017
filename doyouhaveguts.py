@@ -1,4 +1,20 @@
 ##Version 2.0 MonsterImage is now random SOHVA
+#version 2.1 by Marija with music - needs to be fixed, exit button does NOT stop the music
+import pygame
+pygame.mixer.init()
+pygame.mixer.music.load("game_music.wav")
+pygame.mixer.music.play(-1)
+
+#if(top.destroy):
+   # pygame.mixer.music.stop()
+
+#try:
+#    while pygame.mixer.music.get_busy() == True:
+#        continue
+#except top.destroy:
+#        pygame.mixer.music.stop()
+ #       sys.exit()
+
 
 import Tkinter
 from Tkinter import *
