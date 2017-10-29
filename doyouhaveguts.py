@@ -12,6 +12,10 @@ from PIL import ImageTk
 import pygame
 
 from newgame import *
+
+#If using other versions of the creator, change the names in the functions
+# createWalls and createMonsters
+
 import monstercreator
 #import monstercreatorOther
 import monster
@@ -323,7 +327,6 @@ def createWalls(level):
 
 def createMonsters(level):
         global monsters
-
         monsters = monstercreator.createMonsters(level)
 
 def levelUp():
