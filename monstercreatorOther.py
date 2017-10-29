@@ -7,7 +7,7 @@ import monster
 def createMonsters(case):
     monsters = [monster.Monster((8,13), [(8, 13), (8, 12), (8, 11), (7,11), (6, 11), (6, 12), (6, 13), (7,13)])]
 
-    if case == 2:
+    if case == 1:
         monsters += [monster.Monster((1,2),[(1,2),(1,3),(1,4),(1,5),(1,6),\
                                             (1,7),(1,8),(1,9),(1,10),(1,11),\
                                             (1,12),(1,13),(2,13),(3,13),(4,13),\
@@ -20,7 +20,7 @@ def createMonsters(case):
         monsters += [monster.Monster((7,7),[(7,7),(8,7)])]
         monsters += [monster.Monster((7,9),[(7,9),(8,9)])]
         monsters += [monster.Monster((3,11),[(3,11),(3,12),(3,13),(3,12)])]
-    elif case == 1:
+    elif case == 3:
         monsters += [monster.Monster((3,1),[(3,1),(3,2),(4,2),(4,1)])]
         monsters += [monster.Monster((2,5),[(2,5),(2,6)])]
         monsters += [monster.Monster((2,10),[(2,10),(2,11),(2,12),(2,11)])]
