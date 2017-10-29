@@ -1,3 +1,7 @@
+##Version 2.0 MonsterImage is now random SOHVA
+# version 2.1 by Marija with music - needs to be fixed, exit button does NOT stop the music
+
+
 import Tkinter
 from Tkinter import *
 import time
@@ -97,7 +101,6 @@ pumpkinImage = ImageTk.PhotoImage(file="res/pumpkin2BG.png")
 happyImage = ImageTk.PhotoImage(file="res/happy_pumpkinBG.png")
 scaredImage = ImageTk.PhotoImage(file="res/pumpkin_scaredBG.png")
 monsterImages = [ImageTk.PhotoImage(file="res/ghostBG.png"), \
-                 ImageTk.PhotoImage(file="res/batBG.png"), \
                  ImageTk.PhotoImage(file="res/82872-200BG.png"), \
                  ImageTk.PhotoImage(file="res/mouseBG.png")]
 monsterImage = monsterImages[random.randint(0, len(monsterImages) - 1)]
