@@ -132,6 +132,8 @@ def newGame():
     for row in sGrid:
         for item in row:
             item.configure(image = grass, bg = "grey")
+    refreshLives()
+#    liveslabel.configure(text = "You have "+str(lives)+" attempts")
     monsterImage = monsterImages[random.randint(0,len(monsterImages)-1)]
 
     level = 1
