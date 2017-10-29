@@ -1,6 +1,4 @@
-##Version 2.0 MonsterImage is now random SOHVA
-# version 2.1 by Marija with music - needs to be fixed, exit button does NOT stop the music
-
+otherLevels=False
 
 import Tkinter
 from Tkinter import *
@@ -14,11 +12,15 @@ import pygame
 #If using other versions of the creator, change the names in the functions
 # createWalls and createMonsters
 
-import monstercreator
-#import monstercreatorOther
 import monster
-import wallcreator
-#import wallcreatorOther
+if otherLevels:
+    import monstercreatorOther as monstercreator
+else:
+    import monstercreator
+if otherLevels:
+    import wallcreatorOther as wallcreator
+else:
+    import wallcreator
 
 pygame.mixer.init()
 pygame.mixer.music.load("res/music.mp3")
