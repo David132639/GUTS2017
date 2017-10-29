@@ -1,7 +1,3 @@
-##Version 2.0 MonsterImage is now random SOHVA
-# version 2.1 by Marija with music - needs to be fixed, exit button does NOT stop the music
-
-
 import Tkinter
 from Tkinter import *
 import time
