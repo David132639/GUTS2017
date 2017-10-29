@@ -1,4 +1,4 @@
-otherLevels=False
+otherLevels=True
 
 import Tkinter
 from Tkinter import *
@@ -492,6 +492,8 @@ newButton = Tkinter.Button(top, text="New Game", fg="brown",command=newGame, bac
 newButton.grid(row=1, column=columns + 1, rowspan=2)
 nextButton = Tkinter.Button(top, text="Next Level", fg="brown",command=levelUp, state="disabled", background='light yellow', relief = RIDGE,  bd=3, highlightcolor="red")
 nextButton.grid(row=2, column=columns + 1, rowspan=2)
+
+top.title("Why Not a Pumpkin Apocalypse?")
 
 
 # Keeps track on the level
