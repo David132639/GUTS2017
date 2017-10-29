@@ -9,6 +9,8 @@ from threading import Thread
 from PIL import ImageTk
 import pygame
 
+
+
 #If using other versions of the creator, change the names in the functions
 # createWalls and createMonsters
 
@@ -27,7 +29,7 @@ pygame.mixer.music.load("res/music.mp3")
 pygame.mixer.music.play(-1)
 
 top = Tkinter.Tk()
-
+#top.configure(background='blue')
 ####################### Network staff
 m = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
 with open("ip.txt") as f:
@@ -136,7 +138,6 @@ def newGame():
     for row in sGrid:
         for item in row:
             item.configure(image = grass, bg = "grey")
-
     refreshLives()
 #    liveslabel.configure(text = "You have "+str(lives)+" attempts")
 
@@ -204,7 +205,7 @@ def game():
     global moves
     global movesOnce
     refreshLives()
-    statelabel.configure(text="Have not won/lost yet.")
+    statelabel.configure(text="")
 
     ##Adding monsters 1.3 SOHVA
     global monsters
@@ -248,14 +249,17 @@ def game():
     if newloc == finish:
         send("xOneFinished")
 
-##        ##FOR TESTING
-##        otherFinished = True
-##        ##
+        ##FOR TESTING
+        otherFinished = True
+        ##
 
         if otherFinished == True:
             send("xAllFinished")
             nextButton.configure(state="normal")
-            win()
+            if level == 3:
+                winwin()
+            else:
+                win()
 
         print "Game nearly Won!"
 
@@ -437,7 +441,7 @@ refreshLives()
 
     
 liveslabel.grid(row=0, columnspan=5, column=4)
-statelabel = Tkinter.Label(top, text="Have not won/lost yet.")
+statelabel = Tkinter.Label(top, text="", font="bold", fg="red")
 statelabel.grid(row=0, columnspan=6, column=9)
 
 # Create the grid
@@ -497,13 +501,16 @@ def dead():
     global statelabel
     if game_on:
         game_on = False
-        statelabel.configure(text="You lost. Try again!")
+        statelabel.configure(text="Game over")
 
+def winwin():
+    global statelabel
+    statelabel.configure(text="You win!")
 
 def win():
     # global game_on
     global statelabel
-    statelabel.configure(text="You won. Try next level!")
+    statelabel.configure(text="Good job! Keep going")
 
 
 while True:
