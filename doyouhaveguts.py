@@ -201,7 +201,7 @@ def game():
     global lives
     global moves
     global movesOnce
-
+    refreshLives()
     statelabel.configure(text="Have not won/lost yet.")
 
     ##Adding monsters 1.3 SOHVA
