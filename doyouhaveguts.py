@@ -135,7 +135,8 @@ def addFood():
 			break
 
 
-def refreshLives()
+def refreshLives():
+	global liveslabel
 	liveslabel = Tkinter.Label(top, text="Your partner has " + str(lives) + " attempts")
 
 
@@ -214,7 +215,7 @@ def game():
 	for i in range(len(foodlist)):
 		if newloc == foodlist[i]:
 			lives -= 1
-			livesRefresh()
+			refreshLives()
 			if lives == 0:
 				dead()
 			nextloc = newloc[0] - direction[0], newloc[1] - direction[1]
@@ -369,7 +370,7 @@ foodlist = []
 finish = (rows - 3, columns - 3)
 walls = []
 lives = 5
-livesRefresh()
+refreshLives()
 liveslabel.grid(row=0, columnspan=5, column=4)
 statelabel = Tkinter.Label(top, text="Have not won/lost yet.")
 statelabel.grid(row=0, columnspan=6, column=9)
