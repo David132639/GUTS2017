@@ -55,6 +55,7 @@ def keypressForeign(data):  # Process incoming messsage
     global updateNextButton
     global level
     global goToNextLevel
+    global goToDead
     if data == 'Up' or data == 'w':
         turnUp()
         stop()
@@ -71,7 +72,7 @@ def keypressForeign(data):  # Process incoming messsage
         global lives
         lives -= 1
         if lives == 0:
-            dead()
+            goToDead = True
         print "Partner hit a monster", str(lives)
         newloc = (1, 1)
     if data == 'xOneFinished':
@@ -128,12 +129,15 @@ def newGame():
     global lives
 
     lives = 5
+
     liveslabel.configure(text = "You have "+str(lives)+" attempts")
     for row in sGrid:
         for item in row:
             item.configure(image = grass, bg = "grey")
+
     refreshLives()
 #    liveslabel.configure(text = "You have "+str(lives)+" attempts")
+
     monsterImage = monsterImages[random.randint(0,len(monsterImages)-1)]
 
     level = 1
@@ -183,6 +187,7 @@ def addFood():
 def game():
     global otherFinished
     global goToNextLevel
+    global goToDead
     global pumpkin
     global direction
     global game_on
@@ -241,9 +246,9 @@ def game():
     if newloc == finish:
         send("xOneFinished")
 
-        ##FOR TESTING
-        otherFinished = True
-        ##
+##        ##FOR TESTING
+##        otherFinished = True
+##        ##
 
         if otherFinished == True:
             send("xAllFinished")
@@ -291,6 +296,10 @@ def game():
     if updateNextButton:
         nextButton.configure(state="normal")
         updateNextButton = False
+
+    if goToDead:
+        dead()
+        goToDead = False
 
 
 ##Version 1.2 SOHVA ADDED MOVES VARIABLE FOR DECIDING WHETHER PLAYER MOVES OR NOT
@@ -469,6 +478,7 @@ otherFinished = False
 
 updateNextButton = False
 goToNextLevel = False
+goToDead = False
 
 quitButton = Tkinter.Button(top, text="Quit", command=top.destroy)
 quitButton.grid(row=0, column=columns + 1, rowspan=2)
