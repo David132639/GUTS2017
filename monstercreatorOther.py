@@ -20,13 +20,41 @@ def createMonsters(case):
         monsters += [monster.Monster((7,7),[(7,7),(8,7)])]
         monsters += [monster.Monster((7,9),[(7,9),(8,9)])]
         monsters += [monster.Monster((3,11),[(3,11),(3,12),(3,13),(3,12)])]
+        route = []
+        for i in range(2,9):
+            route += [(i,1)]
+            route += [(i,1)]
+        for i in range(1,6):
+            route += [(8,i)]
+            route += [(8,i)]
+        for i in [7,6,5,4,3,2,1]:
+            route += [(i,5)]
+            route += [(i,5)]
+        for i in range(1,8):
+            route += [(i,4)]
+            route += [(i,4)]
+        for i in [3,2]:
+            route += [(7,i)]
+            route += [(7,i)]
+        for i in [7,6,5,4,3,2]:
+            route += [(i,2)]
+            route += [(i,2)]
+        for i in [2,1]:
+            route += [(1,i)]
+        monsters += [monster.Monster((2,2),route)]
     elif case == 3:
         monsters += [monster.Monster((3,1),[(3,1),(3,2),(4,2),(4,1)])]
         monsters += [monster.Monster((2,5),[(2,5),(2,6)])]
         monsters += [monster.Monster((2,10),[(2,10),(2,11),(2,12),(2,11)])]
         monsters += [monster.Monster((1,13),[(1,13),(2,13),(3,13),(2,13)])]
         i = 8
-        monsters += [monster.Monster((5,i),[(5,i),(6,i),(7,i),(8,i),(7,i),(6,i)])]
+        monsters += [monster.Monster((5,i),[(5,i),(5,1),(6,i),(7,i),(8,i),(8,i),(7,i),(6,i)])]
         i = 9
-        monsters += [monster.Monster((8,i),[(8,i),(7,i),(6,i),(5,i),(6,i),(7,i)])]
+        monsters += [monster.Monster((8,i),[(8,i),(8,i),(7,i),(6,i),(5,i),(5,i),(6,i),(7,i)])]
+        route = []
+        for i in range(2,10):
+            route += [(1,i)]
+        for i in [10,9,8,7,5,4,3,2,1]:
+            route += [(1,i)]
+        monsters += [monster.Monster(1,2,route)]
     return monsters
