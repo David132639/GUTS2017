@@ -1,3 +1,7 @@
+##Version 2.0 MonsterImage is now random SOHVA
+# version 2.1 by Marija with music - needs to be fixed, exit button does NOT stop the music
+
+
 import Tkinter
 from Tkinter import *
 import time
@@ -6,6 +10,8 @@ import socket
 from threading import Thread
 from PIL import ImageTk
 import pygame
+
+
 
 #If using other versions of the creator, change the names in the functions
 # createWalls and createMonsters
@@ -21,7 +27,7 @@ pygame.mixer.music.load("res/music.mp3")
 pygame.mixer.music.play(-1)
 
 top = Tkinter.Tk()
-
+#top.configure(background='blue')
 ####################### Network staff
 m = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
 with open("ip.txt") as f:
@@ -95,7 +101,6 @@ pumpkinImage = ImageTk.PhotoImage(file="res/pumpkin2BG.png")
 happyImage = ImageTk.PhotoImage(file="res/happy_pumpkinBG.png")
 scaredImage = ImageTk.PhotoImage(file="res/pumpkin_scaredBG.png")
 monsterImages = [ImageTk.PhotoImage(file="res/ghostBG.png"), \
-                 ImageTk.PhotoImage(file="res/batBG.png"), \
                  ImageTk.PhotoImage(file="res/82872-200BG.png"), \
                  ImageTk.PhotoImage(file="res/mouseBG.png")]
 monsterImage = monsterImages[random.randint(0, len(monsterImages) - 1)]
@@ -125,18 +130,22 @@ def newGame():
     global lives
 
     lives = 5
+    liveslabel.configure(text = "You have "+str(lives)+" attempts")
+    for row in sGrid:
+        for item in row:
+            item.configure(image = grass, bg = "grey")
     refreshLives()
 #    liveslabel.configure(text = "You have "+str(lives)+" attempts")
     monsterImage = monsterImages[random.randint(0,len(monsterImages)-1)]
 
     level = 1
-    sGrid[pumpkin[0]][pumpkin[1]].configure(image = pumpkinright)
+    createWalls(level)
+    createMonsters(level)
     createPumpkin()
+    sGrid[pumpkin[0]][pumpkin[1]].configure(image = pumpkinImage)
     foodlist=[]
     #get_score()
-    for row in sGrid:
-        for item in row:
-            item.configure(image = grass, bg = "grey")
+
 
     global numFood
     numFood = random.randint(1,3)
@@ -190,7 +199,7 @@ def game():
     global moves
     global movesOnce
 
-    statelabel.configure(text="Have not won/lost yet.")
+    statelabel.configure(text="")
 
     ##Adding monsters 1.3 SOHVA
     global monsters
@@ -234,14 +243,17 @@ def game():
     if newloc == finish:
         send("xOneFinished")
 
-##        ##FOR TESTING
-##        otherFinished = True
-##        ##
+        ##FOR TESTING
+        otherFinished = True
+        ##
 
         if otherFinished == True:
             send("xAllFinished")
             nextButton.configure(state="normal")
-            win()
+            if level == 3:
+                winwin()
+            else:
+                win()
 
         print "Game nearly Won!"
 
@@ -419,7 +431,7 @@ refreshLives()
 
     
 liveslabel.grid(row=0, columnspan=5, column=4)
-statelabel = Tkinter.Label(top, text="Have not won/lost yet.")
+statelabel = Tkinter.Label(top, text="", font="bold", fg="red")
 statelabel.grid(row=0, columnspan=6, column=9)
 
 # Create the grid
@@ -478,13 +490,16 @@ def dead():
     global statelabel
     if game_on:
         game_on = False
-        statelabel.configure(text="You lost. Try again!")
+        statelabel.configure(text="Game over")
 
+def winwin():
+    global statelabel
+    statelabel.configure(text="You win!")
 
 def win():
     # global game_on
     global statelabel
-    statelabel.configure(text="You won. Try next level!")
+    statelabel.configure(text="Good job! Keep going")
 
 
 while True:
